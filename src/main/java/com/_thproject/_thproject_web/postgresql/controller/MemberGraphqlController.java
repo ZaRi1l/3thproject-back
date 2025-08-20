@@ -1,9 +1,8 @@
-package com._thproject._thproject_web.controller;
+package com._thproject._thproject_web.postgresql.controller;
 
-import com._thproject._thproject_web.dto.MemberDto;
-import com._thproject._thproject_web.dto.MemberDto.MemberRequestDto;
-import com._thproject._thproject_web.entity.Member;
-import com._thproject._thproject_web.service.MemberService;
+import com._thproject._thproject_web.postgresql.dto.MemberDto;
+import com._thproject._thproject_web.postgresql.entity.Member;
+import com._thproject._thproject_web.postgresql.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;

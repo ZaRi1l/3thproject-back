@@ -1,4 +1,4 @@
-package com._thproject._thproject_web.entity;
+package com._thproject._thproject_web.postgresql.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

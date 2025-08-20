@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of(24)
 	}
 }
 
@@ -52,6 +52,8 @@ dependencies {
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.12.6'
 
 
+	// Oracle 데이터베이스와 통신하기 위한 필수 드라이버
+	runtimeOnly "com.oracle.database.jdbc:ojdbc11:23.9.0.25.07"
 
 }	
 
