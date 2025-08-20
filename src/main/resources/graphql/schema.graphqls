@@ -1,17 +1,109 @@
-# Member 객체의 타입을 정의합니다.
-# 기존 Member Entity와 필드를 맞춰줍니다.
+# ===================================================================
+# 기존 Member 관련 타입 및 API (PostgreSQL DB)
+# ===================================================================
 type Member {
     id: ID!
     username: String!
     email: String!
 }
 
-# 데이터를 조회(Read)하는 API들을 정의하는 공간입니다. (REST의 GET 역할)
-type Query {
-    findAllMembers: [Member]
+# ===================================================================
+# [신규] PACS 데이터 관련 타입 (Oracle DB) - 이미지 컬럼과 100% 일치
+# ===================================================================
+
+# PatientTab
+type Patient {
+    pid: ID!
+    pname: String
+    psex: String
+    pbirthdate: String
+    # 관계: 이 환자가 가진 검사들의 목록
+    studies: [Study]
 }
 
-# 데이터를 변경(Create, Update, Delete)하는 API들을 정의하는 공간입니다. (REST의 POST, PUT, DELETE 역할)
+# StudyTab
+type Study {
+    studyKey: ID!
+    studyinsuid: String
+    studydate: String
+    studytime: String
+    accessnum: String
+    studyid: String
+    studydesc: String
+    modality: String
+    bodypart: String
+    pid: String
+    pname: String
+    psex: String
+    pbirthdatetime: String
+    patage: String
+    seriescnt: Int
+    imagecnt: Int
+    # 관계: 이 검사가 가진 시리즈들의 목록
+    series: [Series]
+    # 관계: 이 검사가 속한 환자 정보 (역참조)
+    patient: Patient
+}
+
+# SeriesTab
+type Series {
+    studyKey: ID!
+    seriesKey: ID!
+    studyinsuid: String
+    seriesinsuid: String
+    seriesnum: Int
+    modality: String
+    seriesdate: String
+    seriestime: String
+    bodypart: String
+    seriesdesc: String
+    imagecnt: Int
+    # 관계: 이 시리즈가 가진 이미지들의 목록
+    images: [Image]
+    # 관계: 이 시리즈가 속한 검사 정보 (역참조)
+    study: Study
+}
+
+# ImageTab
+type Image {
+    studyKey: ID!
+    seriesKey: ID!
+    imageKey: ID!
+    studyinsuid: String
+    seriesinsuid: String
+    sopinstanceuid: String
+    sopclassuid: String
+    ststorageid: Int
+    path: String
+    fname: String
+    # 관계: 이 이미지가 속한 시리즈 정보 (역참조)
+    series: Series
+}
+
+
+# ===================================================================
+# API 진입점 통합 (Query / Mutation)
+# ===================================================================
+
+# 데이터를 조회(Read)하는 API들을 한 곳에 정의합니다.
+type Query {
+    # [기존] PostgreSQL DB에서 모든 멤버 조회
+    findAllMembers: [Member]
+
+    # [신규] Oracle DB에서 환자 ID로 데이터 조회
+    patient(pid: ID!): Patient
+
+    # [신규] Oracle DB에서 검사 Key로 데이터 조회
+    study(studyKey: ID!): Study
+
+    # [신규] Oracle DB에서 시리즈 Key로 데이터 조회
+    series(studyKey: ID!, seriesKey: ID!): Series
+}
+
+# 데이터를 변경(Create, Update, Delete)하는 API들을 정의합니다.
 type Mutation {
+    # [기존] PostgreSQL DB에 새로운 멤버 생성
     createMember(username: String!, email: String!): Member
+
+    # Oracle DB는 읽기 전용이므로, 이 부분에 PACS 데이터 관련 Mutation은 추가하지 않습니다.
 }
