@@ -1,0 +1,17 @@
+# Member 객체의 타입을 정의합니다.
+# 기존 Member Entity와 필드를 맞춰줍니다.
+type Member {
+    id: ID!
+    username: String!
+    email: String!
+}
+
+# 데이터를 조회(Read)하는 API들을 정의하는 공간입니다. (REST의 GET 역할)
+type Query {
+    findAllMembers: [Member]
+}
+
+# 데이터를 변경(Create, Update, Delete)하는 API들을 정의하는 공간입니다. (REST의 POST, PUT, DELETE 역할)
+type Mutation {
+    createMember(username: String!, email: String!): Member
+}
