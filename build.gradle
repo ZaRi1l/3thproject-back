@@ -51,10 +51,6 @@ dependencies {
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.12.6'
 
-	// AWS S3
-	// https://mvnrepository.com/artifact/io.awspring.cloud/spring-cloud-aws-starter-s3
-	implementation group: 'io.awspring.cloud', name: 'spring-cloud-aws-starter-s3', version: '3.4.0'
-
 
 
 }	
