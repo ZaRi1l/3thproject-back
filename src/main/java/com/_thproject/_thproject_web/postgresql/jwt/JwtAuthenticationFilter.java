@@ -1,4 +1,4 @@
-package com._thproject._thproject_web.jwt;
+package com._thproject._thproject_web.postgresql.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -35,4 +35,5 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         }
         return null;
     }
+
 }
