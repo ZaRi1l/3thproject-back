@@ -1,6 +1,6 @@
-package com._thproject._thproject_web.jwt;
+package com._thproject._thproject_web.postgresql.jwt;
 
-import com._thproject._thproject_web.dto.TokenDto;
+import com._thproject._thproject_web.postgresql.dto.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -87,4 +87,5 @@ public class JwtTokenProvider {
             return e.getClaims();
         }
     }
+
 }
