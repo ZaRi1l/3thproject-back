@@ -1,6 +1,6 @@
 package com._thproject._thproject_web.postgresql.service;
 
-import com._thproject._thproject_web.repository.postgresql.UserRepository;
+import com._thproject._thproject_web.postgresql.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

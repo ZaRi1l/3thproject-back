@@ -1,7 +1,7 @@
 package com._thproject._thproject_web.config;
 
-import com._thproject._thproject_web.entity.User;
-import com._thproject._thproject_web.repository.UserRepository;
+import com._thproject._thproject_web.postgresql.entity.User;
+import com._thproject._thproject_web.postgresql.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
