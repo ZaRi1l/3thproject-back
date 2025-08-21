@@ -1,8 +1,5 @@
 package com._thproject._thproject_web.config;
 
-import com._thproject._thproject_web.postgresql.jwt.JwtAuthenticationFilter;
-import com._thproject._thproject_web.postgresql.jwt.JwtTokenProvider;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
