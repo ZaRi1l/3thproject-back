@@ -1,3 +1,5 @@
+package com._thproject._thproject_web.config;
+
 import com._thproject._thproject_web.entity.User;
 import com._thproject._thproject_web.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
