@@ -5,8 +5,10 @@ import com._thproject._thproject_web.oracle.repository.StudyRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 @Controller
+@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true") // <-- 이 줄 추가
 public class DicomDataController {
 
     private final StudyRepository studyRepository;

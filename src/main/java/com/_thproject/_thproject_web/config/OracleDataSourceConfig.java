@@ -12,12 +12,14 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
+@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 @EnableTransactionManagement
 @EnableJpaRepositories(
         basePackages = "com._thproject._thproject_web.oracle.repository",
