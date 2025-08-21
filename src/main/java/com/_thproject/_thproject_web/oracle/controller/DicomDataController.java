@@ -12,11 +12,11 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
+
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-=======
+
 import java.util.List;
->>>>>>> 11655094ef5538528fe5fedf402fa751cbff3da2
+
 
 @Controller
 @ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true") // <-- 이 줄 추가
