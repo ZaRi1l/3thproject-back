@@ -72,7 +72,8 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/graphql",
-                                "/graphiql/**"
+                                "/graphiql/**",
+                                "/api/images/**"
                         ).permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
