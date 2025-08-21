@@ -1,8 +1,8 @@
-package com._thproject._thproject_web.service;
+package com._thproject._thproject_web.postgresql.service;
 
-import com._thproject._thproject_web.dto.MemberDto;
-import com._thproject._thproject_web.entity.Member;
-import com._thproject._thproject_web.repository.MemberRepository;
+import com._thproject._thproject_web.postgresql.dto.MemberDto;
+import com._thproject._thproject_web.postgresql.entity.Member;
+import com._thproject._thproject_web.postgresql.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

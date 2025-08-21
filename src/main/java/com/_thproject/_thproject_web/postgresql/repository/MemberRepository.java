@@ -1,6 +1,6 @@
-package com._thproject._thproject_web.repository;
+package com._thproject._thproject_web.postgresql.repository;
 
-import com._thproject._thproject_web.entity.Member;
+import com._thproject._thproject_web.postgresql.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

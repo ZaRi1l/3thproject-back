@@ -1,4 +1,4 @@
-package com._thproject._thproject_web.dto;
+package com._thproject._thproject_web.postgresql.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
