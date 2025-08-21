@@ -8,9 +8,8 @@ type Member {
 }
 
 # ===================================================================
-# [신규] PACS 데이터 관련 타입 (Oracle DB) - 이미지 컬럼과 100% 일치
+# PACS 데이터 관련 타입 (Oracle DB) - 최종 확장 버전
 # ===================================================================
-
 # PatientTab
 type Patient {
     pid: ID!
@@ -84,26 +83,19 @@ type Image {
 # ===================================================================
 # API 진입점 통합 (Query / Mutation)
 # ===================================================================
-
 # 데이터를 조회(Read)하는 API들을 한 곳에 정의합니다.
 type Query {
-    # [기존] PostgreSQL DB에서 모든 멤버 조회
+    # [기존] PostgreSQL DB
     findAllMembers: [Member]
 
-    # [신규] Oracle DB에서 환자 ID로 데이터 조회
+    # [신규] Oracle DB
     patient(pid: ID!): Patient
-
-    # [신규] Oracle DB에서 검사 Key로 데이터 조회
     study(studyKey: ID!): Study
-
-    # [신규] Oracle DB에서 시리즈 Key로 데이터 조회
     series(studyKey: ID!, seriesKey: ID!): Series
 }
 
 # 데이터를 변경(Create, Update, Delete)하는 API들을 정의합니다.
 type Mutation {
-    # [기존] PostgreSQL DB에 새로운 멤버 생성
+    # [기존] PostgreSQL DB
     createMember(username: String!, email: String!): Member
-
-    # Oracle DB는 읽기 전용이므로, 이 부분에 PACS 데이터 관련 Mutation은 추가하지 않습니다.
 }

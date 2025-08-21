@@ -49,7 +49,8 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/graphql",
-                                "/graphiql/**"
+                                "/graphiql/**",
+                                "/api/images/**"
                         ).permitAll()
                         // ▼▼▼▼▼ [핵심] 이 부분을 추가합니다 ▼▼▼▼▼
                         // /api/admin/으로 시작하는 모든 경로는 'ADMIN' 역할을 가진 사용자만 접근 가능
