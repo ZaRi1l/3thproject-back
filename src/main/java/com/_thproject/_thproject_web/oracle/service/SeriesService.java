@@ -42,4 +42,8 @@ public class SeriesService {
     public SeriesDto findByStudyKeyAndSeriesKey(Long studyKey, Long seriesKey) {
         return seriesRepository.findByStudyKeyAndSeriesKey(studyKey, seriesKey).orElse(null);
     }
+
+    public SeriesDto getSeriesByStudyKeyAndSeriesKey(Long studyKey, Long seriesKey) {
+        return seriesRepository.findByStudyKeyAndSeriesKey(studyKey, seriesKey).orElse(null);
+    }
 }
