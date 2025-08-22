@@ -9,6 +9,7 @@ import com._thproject._thproject_web.postgresql.entity.Report;
 import com._thproject._thproject_web.postgresql.service.ReportService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
+@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 @RequiredArgsConstructor
 public class PacsDataResolver {
 

@@ -7,6 +7,7 @@ import jcifs.smb.NtlmPasswordAuthenticator;
 import jcifs.smb.SmbFile;
 import jcifs.smb.SmbFileInputStream;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Service
+@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 public class ImageStorageService {
 
     // application.properties에서 설정값을 주입받습니다.

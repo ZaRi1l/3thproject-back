@@ -3,10 +3,12 @@ package com._thproject._thproject_web.oracle.service;
 import com._thproject._thproject_web.oracle.dto.PatientDto;
 import com._thproject._thproject_web.oracle.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 @RequiredArgsConstructor
 public class PatientService {
 

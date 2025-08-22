@@ -1,6 +1,7 @@
 package com._thproject._thproject_web.oracle.controller;
 
 import com._thproject._thproject_web.oracle.service.ImageStorageService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
+@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 @RequestMapping("/api/images")
 public class ImageDownloadController {
 
