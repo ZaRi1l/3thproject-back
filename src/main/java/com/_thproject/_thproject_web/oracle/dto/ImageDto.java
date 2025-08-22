@@ -24,4 +24,15 @@ public class ImageDto {
         this.path = path;
         this.fname = fname;
     }
+
+    @Getter
+    public static class ImagePathDto {
+        private final String path;
+        private final String fname;
+        public ImagePathDto(String path, String fname) {
+            this.path = path;
+            this.fname = fname;
+        }
+    }
+
 }

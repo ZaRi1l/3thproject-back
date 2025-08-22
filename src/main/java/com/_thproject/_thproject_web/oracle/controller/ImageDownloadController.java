@@ -1,7 +1,12 @@
 package com._thproject._thproject_web.oracle.controller;
 
 import com._thproject._thproject_web.oracle.service.ImageStorageService;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 
+// @Tag: 이 컨트롤러의 API들을 "DICOM Image Download API" 라는 이름으로 그룹화합니다.
+@Tag(name = "DICOM Image Download API", description = "DICOM 이미지 파일 다운로드 및 보기 API")
 @RestController
-@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 @RequestMapping("/api/images")
 public class ImageDownloadController {
 
@@ -23,56 +33,71 @@ public class ImageDownloadController {
         this.imageStorageService = imageStorageService;
     }
 
-    /**
-     * 이미지 다운로드 요청을 처리하는 API
-     * 예: /api/images/download?path=...&fname=...
-     */
-    @GetMapping("/download")
-    public ResponseEntity<Resource> downloadImage(
-            @RequestParam String path,
-            @RequestParam String fname) {
-
+    // ===================================================================
+    // 1. Base64 인코딩된 경로로 파일 다운로드 API
+    // ===================================================================
+    @Operation(summary = "인코딩된 경로로 이미지 다운로드", description = "Base64로 인코딩된 전체 파일 경로를 받아 디코딩 후, 해당 파일을 다운로드합니다.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "성공적으로 파일 다운로드", content = @Content(mediaType = "application/dicom")),
+        @ApiResponse(responseCode = "404", description = "파일을 찾을 수 없거나 경로가 잘못됨", content = @Content)
+    })
+    @GetMapping("/encoded-download")
+    public ResponseEntity<Resource> downloadImageByEncodedPath(
+            @Parameter(name = "encodedPath", description = "Base64로 인코딩된 전체 파일 경로", required = true, example = "RDovZGljb21faW1hZ2VzLzIwMjMvMDEvMTUvaW1nMDAxLmRjbQ==")
+            @RequestParam String encodedPath) {
+        
         try {
-            // 1. 서비스 계층을 호출하여 네트워크 드라이브에서 파일을 Resource 형태로 가져옵니다.
-            Resource resource = imageStorageService.loadImageAsResource(path, fname);
+            byte[] decodedBytes = Base64.getDecoder().decode(encodedPath);
+            String fullPath = new String(decodedBytes, StandardCharsets.UTF_8);
 
-            // 2. 클라이언트에게 파일 다운로드임을 알려주기 위한 HTTP 헤더를 설정합니다.
+            Path pathObject = Paths.get(fullPath);
+            String directoryPath = pathObject.getParent().toString();
+            String fileName = pathObject.getFileName().toString();
+
+            Resource resource = imageStorageService.loadImageAsResource(directoryPath, fileName);
+
             HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fname + "\"");
-            // DICOM 표준 MIME 타입을 명시합니다. (없어도 동작은 하지만, 명시하는 것이 좋습니다.)
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
             headers.add(HttpHeaders.CONTENT_TYPE, "application/dicom");
 
-            // 3. 파일 데이터(Resource)와 헤더를 담아 성공(200 OK) 응답을 보냅니다.
-            return ResponseEntity.ok()
-                    .headers(headers)
-                    .body(resource);
+            return ResponseEntity.ok().headers(headers).body(resource);
 
-        } catch (IOException e) {
-            // 파일을 찾지 못했거나 네트워크 연결에 실패한 경우
-            // 에러 로그를 남기고, 클라이언트에게는 파일을 찾을 수 없다는 응답(404 Not Found)을 보냅니다.
-            System.err.println("파일 다운로드 실패: path=" + path + ", fname=" + fname);
+        } catch (Exception e) {
+            System.err.println("파일 다운로드 실패: encodedPath=" + encodedPath);
             e.printStackTrace();
             return ResponseEntity.notFound().build();
         }
     }
 
     // ===================================================================
-    // 2. [신규] DICOM 뷰어에서 "파일 보기"를 위한 API
+    // 2. Base64 인코딩된 경로로 파일 보기 API
     // ===================================================================
-    @GetMapping("/view")
-    public ResponseEntity<Resource> viewImage(@RequestParam String path, @RequestParam String fname) {
+    @Operation(summary = "인코딩된 경로로 이미지 보기", description = "Base64로 인코딩된 전체 파일 경로를 받아 디코딩 후, 해당 파일을 뷰어에서 볼 수 있도록 인라인으로 제공합니다.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "성공적으로 파일 제공", content = @Content(mediaType = "application/dicom")),
+        @ApiResponse(responseCode = "404", description = "파일을 찾을 수 없거나 경로가 잘못됨", content = @Content)
+    })
+    @GetMapping("/encoded-view")
+    public ResponseEntity<Resource> viewImageByEncodedPath(
+            @Parameter(name = "encodedPath", description = "Base64로 인코딩된 전체 파일 경로", required = true, example = "RDovZGljb21faW1hZ2VzLzIwMjMvMDEvMTUvaW1nMDAxLmRjbQ==")
+            @RequestParam String encodedPath) {
+        
         try {
-            Resource resource = imageStorageService.loadImageAsResource(path, fname);
-            HttpHeaders headers = new HttpHeaders();
-            // Content-Disposition 헤더를 아예 보내지 않거나, "inline"으로 보냅니다.
-            // 이렇게 하면 브라우저는 파일을 다운로드하지 않고, 응답 본문을 그대로 뷰어에게 전달합니다.
+            byte[] decodedBytes = Base64.getDecoder().decode(encodedPath);
+            String fullPath = new String(decodedBytes, StandardCharsets.UTF_8);
 
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fname + "\"");
+            Path pathObject = Paths.get(fullPath);
+            String directoryPath = pathObject.getParent().toString();
+            String fileName = pathObject.getFileName().toString();
+
+            Resource resource = imageStorageService.loadImageAsResource(directoryPath, fileName);
             
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"");
             headers.add(HttpHeaders.CONTENT_TYPE, "application/dicom");
 
             return ResponseEntity.ok().headers(headers).body(resource);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.notFound().build();
         }
