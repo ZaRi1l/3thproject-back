@@ -33,4 +33,8 @@ public class StudyService {
     public List<StudyDto> getStudiesByPid(String pid) {
         return studyRepository.findStudiesByPid(pid);
     }
+
+    public List<StudyDto> findStudiesByPid(String pid) {
+        return studyRepository.findStudiesByPid(pid);
+    }
 }
