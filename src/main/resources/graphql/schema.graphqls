@@ -1,11 +1,14 @@
 # ===================================================================
 # 기존 Member 관련 타입 및 API (PostgreSQL DB)
 # ===================================================================
-type Member {
-    id: ID!
+# [수정] Member -> User로 이름을 변경하여 명확하게 합니다.
+# 이미 User 엔티티를 사용하고 있으므로 스키마도 통일하는 것이 좋습니다.
+type User {
+    userid: ID! # 필드명도 엔티티와 일치시킵니다.
     username: String!
-    email: String!
+    userRole: String # userRole도 추가해줍니다.
 }
+
 
 # ===================================================================
 # PACS 데이터 관련 타입 (Oracle DB) - 최종 확장 버전
@@ -16,7 +19,6 @@ type Patient {
     pname: String
     psex: String
     pbirthdate: String
-    # 관계: 이 환자가 가진 검사들의 목록
     studies: [Study]
 }
 
@@ -38,10 +40,10 @@ type Study {
     patage: String
     seriescnt: Int
     imagecnt: Int
-    # 관계: 이 검사가 가진 시리즈들의 목록
     series: [Series]
-    # 관계: 이 검사가 속한 환자 정보 (역참조)
     patient: Patient
+    # [추가] 이 검사에 작성된 소견서 정보를 조회할 수 있는 관계를 추가합니다.
+    report: Report
 }
 
 # SeriesTab
@@ -57,9 +59,7 @@ type Series {
     bodypart: String
     seriesdesc: String
     imagecnt: Int
-    # 관계: 이 시리즈가 가진 이미지들의 목록
     images: [Image]
-    # 관계: 이 시리즈가 속한 검사 정보 (역참조)
     study: Study
 }
 
@@ -75,8 +75,35 @@ type Image {
     ststorageid: Int
     path: String
     fname: String
-    # 관계: 이 이미지가 속한 시리즈 정보 (역참조)
     series: Series
+}
+
+# ===================================================================
+# [추가] 소견서(Report) 관련 타입 (PostgreSQL DB)
+# ===================================================================
+# Report의 상태를 나타내는 Enum
+enum ReportStatus {
+    DRAFT
+    FINAL
+    CORRECTED
+}
+
+# 소견서(Report) 정보를 나타내는 타입
+type Report {
+    reportId: ID!
+    studyKey: Long!
+    author: User! # 소견서 작성자 정보 (위의 User 타입과 연결)
+    reportStatus: ReportStatus
+    reportContent: String
+    createdAt: String # ISO 8601 형식의 날짜/시간 문자열
+    updatedAt: String
+}
+
+# 소견서 생성 또는 수정을 위한 입력 타입
+input ReportInput {
+    studyKey: Long!
+    reportContent: String!
+    reportStatus: ReportStatus = DRAFT
 }
 
 
@@ -85,17 +112,23 @@ type Image {
 # ===================================================================
 # 데이터를 조회(Read)하는 API들을 한 곳에 정의합니다.
 type Query {
-    # [기존] PostgreSQL DB
-    findAllMembers: [Member]
+    # [기존] Member 관련 API는 지금 상황에선 불필요하므로 주석 처리하거나 삭제합니다.
+    # findAllMembers: [Member]
 
-    # [신규] Oracle DB
+    # [기존] Oracle DB PACS 데이터 조회 API
     patient(pid: ID!): Patient
     study(studyKey: ID!): Study
     series(studyKey: ID!, seriesKey: ID!): Series
+
+    # [추가] PostgreSQL DB 소견서 조회 API
+    reportByStudyKey(studyKey: Long!): Report
 }
 
 # 데이터를 변경(Create, Update, Delete)하는 API들을 정의합니다.
 type Mutation {
-    # [기존] PostgreSQL DB
-    createMember(username: String!, email: String!): Member
+    # [기존] Member 관련 API는 지금 상황에선 불필요하므로 주석 처리하거나 삭제합니다.
+    # createMember(username: String!, email: String!): Member
+
+    # [추가] PostgreSQL DB 소견서 생성/수정 API
+    createOrUpdateReport(input: ReportInput!): Report!
 }
