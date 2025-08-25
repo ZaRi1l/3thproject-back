@@ -46,8 +46,10 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "X-Requested-With", "Cache-Control"));
         configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L); // 1시간 캐시
+        
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
@@ -70,7 +72,8 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/graphql",
-                                "/graphiql/**"
+                                "/graphiql/**",
+                                "/api/images/**"
                                 // --- [변경점] Oracle 관련 경로인 "/api/images/**"를 여기서 제거 ---
                         ).permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
