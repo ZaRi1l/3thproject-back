@@ -44,7 +44,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:8080"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "X-Requested-With", "Cache-Control"));
         configuration.setAllowCredentials(true);
@@ -64,7 +64,8 @@ public class SecurityConfig {
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() 
+                        // 1. [수정] OPTIONS 메서드는 인증 없이 항상 허용하도록 맨 앞에 명시합니다.
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
                                 "/auth/**",
                                 "/",
@@ -74,9 +75,11 @@ public class SecurityConfig {
                                 "/graphql",
                                 "/graphiql/**",
                                 "/api/images/**"
-                                // --- [변경점] Oracle 관련 경로인 "/api/images/**"를 여기서 제거 ---
+                                // 2. [수정] 인증이 필요한 /api/images/** 경로는 permitAll 목록에서 제거합니다.
+                                // 이 경로는 아래의 anyRequest().authenticated() 규칙에 따라 처리됩니다.
                         ).permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        // 3. 나머지 모든 요청은 인증을 요구합니다.
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin.disable())
