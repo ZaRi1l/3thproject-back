@@ -15,6 +15,7 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import com._thproject._thproject_web.postgresql.dto.ReportResponseDto;
 
 import java.util.List;
 
@@ -27,7 +28,6 @@ public class DicomDataController {
     private final StudyService studyService;
     private final SeriesService seriesService;
     private final ImageService imageService;
-
     // --- [추가] PostgreSQL Service ---
     private final ReportService reportService;
 
@@ -96,14 +96,19 @@ public class DicomDataController {
         return seriesService.findBySeriesKey(image.getSeriesKey());
     }
 
-    // *** [핵심] 서로 다른 DB의 데이터를 연결하는 부분 ***
+    // *** [핵심 수정 부분] 서로 다른 DB의 데이터를 연결하는 부분 ***
     // Study 타입의 'report' 필드가 요청될 때
     @SchemaMapping(typeName = "Study", field = "report")
-    public Report getReportForStudy(StudyDto study) {
+    // --- [수정] 반환 타입을 엔티티(Report)에서 DTO(ReportResponseDto)로 변경 ---
+    public ReportResponseDto getReportForStudy(StudyDto study) {
         if (study == null || study.getStudyKey() == null) {
             return null;
         }
-        // StudyKey를 사용하여 PostgreSQL DB의 ReportService를 호출합니다.
-        return reportService.getReportByStudyKey(study.getStudyKey());
+
+        // 1. StudyKey를 사용하여 PostgreSQL DB의 ReportService를 호출하고 '엔티티'를 받습니다.
+        var reportEntity = reportService.getReportByStudyKey(study.getStudyKey());
+
+        // 2. 클라이언트에게 반환하기 전에 'DTO'로 변환합니다.
+        return ReportResponseDto.fromEntity(reportEntity);
     }
 }
