@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import java.util.Base64;
 // @Tag: 이 컨트롤러의 API들을 "DICOM Image Download API" 라는 이름으로 그룹화합니다.
 @Tag(name = "DICOM Image Download API", description = "DICOM 이미지 파일 다운로드 및 보기 API")
 @RestController
+//@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 @RequestMapping("/api/images")
 public class ImageDownloadController {
 

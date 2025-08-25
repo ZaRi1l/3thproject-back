@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 // @Tag: 이 컨트롤러에 속한 API들을 그룹화합니다.
 @Tag(name = "DICOM Data API", description = "Oracle DB의 DICOM 관련 데이터 조회 REST API")
 @RestController
+//@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 @RequestMapping("/api/v1")
 public class DicomRestController {
 
