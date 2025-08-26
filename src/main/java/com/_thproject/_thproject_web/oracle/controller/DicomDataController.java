@@ -20,7 +20,7 @@ import com._thproject._thproject_web.postgresql.dto.ReportResponseDto;
 import java.util.List;
 
 @Controller
-//@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 public class DicomDataController {
 
     // --- [추가] Oracle Service ---

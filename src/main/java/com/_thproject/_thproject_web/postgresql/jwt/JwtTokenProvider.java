@@ -1,5 +1,4 @@
 package com._thproject._thproject_web.postgresql.jwt;
-
 import com._thproject._thproject_web.postgresql.dto.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -13,17 +12,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
-
 @Slf4j
 @Component
 public class JwtTokenProvider {
-
     private final Key key;
 
     public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
@@ -87,5 +83,4 @@ public class JwtTokenProvider {
             return e.getClaims();
         }
     }
-
 }

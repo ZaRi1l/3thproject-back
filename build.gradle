@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of(24)
 	}
 }
 
@@ -18,6 +18,15 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
+
+configurations.all {
+    resolutionStrategy {
+        force 'io.jsonwebtoken:jjwt-api:0.12.6'
+        force 'io.jsonwebtoken:jjwt-impl:0.12.6'
+        force 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+    }
+}
+
 
 repositories {
 	mavenCentral()
@@ -52,7 +61,8 @@ dependencies {
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.12.6'
 
 
-	// Oracle 데이터베이스와 통신하기 위한 필수 드라이버
+
+    // Oracle 데이터베이스와 통신하기 위한 필수 드라이버
 	runtimeOnly "com.oracle.database.jdbc:ojdbc11:23.9.0.25.07"
 
 
