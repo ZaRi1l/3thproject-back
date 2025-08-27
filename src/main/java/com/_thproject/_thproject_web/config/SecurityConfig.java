@@ -1,16 +1,19 @@
+// src/main/java/com/_thproject/_thproject_web/config/SecurityConfig.java
+
 package com._thproject._thproject_web.config;
 
 import com._thproject._thproject_web.postgresql.jwt.JwtAuthenticationFilter;
 import com._thproject._thproject_web.postgresql.jwt.JwtTokenProvider;
 
-import org.springframework.http.HttpMethod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,15 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-// @EnableMethodSecurity 어노테이션을 import 합니다.
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
-
 
 import java.util.Arrays;
 
@@ -54,10 +48,9 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:8080"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "X-Requested-With", "Cache-Control"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type")); // 필요한 헤더만 명시
         configuration.setAllowCredentials(true);
-        configuration.setMaxAge(3600L); // 1시간 캐시
-        
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
@@ -66,33 +59,31 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // CSRF, Form Login, HTTP Basic 인증 비활성화 (JWT 사용을 위함)
+                .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+
+                // CORS 설정 적용
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(sessionManagement ->
-                        sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .authorizeHttpRequests(authorize -> authorize
-                        // 1. [수정] OPTIONS 메서드는 인증 없이 항상 허용하도록 맨 앞에 명시합니다.
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers(
-                                "/auth/**",
-                                "/",
-                                "/v3/api-docs/**",
-                                "/swagger-ui/**",
-                                "/swagger-ui.html",
-                                "/graphql",
-                                "/graphiql/**",
-                                "/api/images/**"
-                                // 2. [수정] 인증이 필요한 /api/images/** 경로는 permitAll 목록에서 제거합니다.
-                                // 이 경로는 아래의 anyRequest().authenticated() 규칙에 따라 처리됩니다.
-                        ).permitAll()
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        // 3. 나머지 모든 요청은 인증을 요구합니다.
+
+                // 세션을 사용하지 않도록 설정 (STATELESS)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                // JWT 필터를 UsernamePasswordAuthenticationFilter 앞에 추가
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+
+                // --- [가장 중요한 경로 접근 제어 규칙] ---
+                .authorizeHttpRequests(auth -> auth
+                        // /api/auth/** 경로로 오는 모든 요청은 인증 없이 허용
+                        .requestMatchers("/api/auth/**").permitAll()
+
+                        // Swagger UI 접근 허용
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+                        // 그 외의 모든 요청은 반드시 인증을 거쳐야 함
                         .anyRequest().authenticated()
-                )
-                .formLogin(formLogin -> formLogin.disable())
-                .httpBasic(httpBasic -> httpBasic.disable())
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                );
 
         return http.build();
     }

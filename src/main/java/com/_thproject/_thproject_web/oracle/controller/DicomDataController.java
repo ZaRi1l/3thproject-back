@@ -111,4 +111,5 @@ public class DicomDataController {
         // 2. 클라이언트에게 반환하기 전에 'DTO'로 변환합니다.
         return ReportResponseDto.fromEntity(reportEntity);
     }
+
 }
