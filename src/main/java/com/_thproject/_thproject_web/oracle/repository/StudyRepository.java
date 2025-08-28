@@ -12,7 +12,15 @@ import java.util.Optional;
 public interface StudyRepository extends JpaRepository<DummyEntity, Long> {
     @Query(value = "SELECT STUDYKEY, STUDYINSUID, STUDYDATE, STUDYTIME, ACCESSNUM, STUDYID, STUDYDESC, MODALITY, BODYPART, PID, PNAME, PSEX, PBIRTHDATETIME, PATAGE, SERIESCNT, IMAGECNT FROM STUDYTAB WHERE STUDYKEY = :studyKey AND DELFLAG = 0", nativeQuery = true)
     Optional<StudyDto> findByStudyKey(@Param("studyKey") Long studyKey);
-    
-    @Query(value = "SELECT STUDYKEY, STUDYINSUID, STUDYDATE, STUDYTIME, ACCESSNUM, STUDYID, STUDYDESC, MODALITY, BODYPART, PID, PNAME, PSEX, PBIRTHDATETIME, PATAGE, SERIESCNT, IMAGECNT FROM STUDYTAB WHERE PID = :pid AND DELFLAG = 0 ORDER BY STUDYDATE DESC, STUDYTIME DESC", nativeQuery = true)
-    List<StudyDto> findStudiesByPid(@Param("pid") String pid);
+
+    // [수정] 날짜 범위 검색 기능 추가
+    @Query(value = "SELECT STUDYKEY, STUDYINSUID, STUDYDATE, STUDYTIME, ACCESSNUM, STUDYID, STUDYDESC, MODALITY, " +
+            "BODYPART, PID, PNAME, PSEX, PBIRTHDATETIME, PATAGE, SERIESCNT, IMAGECNT FROM STUDYTAB " +
+            "WHERE PID = :pid AND DELFLAG = 0 " +
+            "  AND (:startDate IS NULL OR STUDYDATE >= :startDate) " +
+            "  AND (:endDate IS NULL OR STUDYDATE <= :endDate) " +
+            "ORDER BY STUDYDATE DESC, STUDYTIME DESC", nativeQuery = true)
+    List<StudyDto> findStudiesByPid(@Param("pid") String pid,
+                                    @Param("startDate") String startDate,
+                                    @Param("endDate") String endDate);
 }

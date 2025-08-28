@@ -1,21 +1,20 @@
+// src/main/java/com/_thproject/_thproject_web/oracle/controller/DicomDataController.java
+
 package com._thproject._thproject_web.oracle.controller;
 
 import com._thproject._thproject_web.oracle.dto.*;
-import com._thproject._thproject_web.oracle.repository.*;
 import com._thproject._thproject_web.oracle.service.PatientService;
 import com._thproject._thproject_web.oracle.service.SeriesService;
 import com._thproject._thproject_web.oracle.service.StudyService;
 import com._thproject._thproject_web.oracle.service.ImageService;
-// [추가] PostgreSQL의 Report 엔티티와 ReportService를 import 합니다.
-import com._thproject._thproject_web.postgresql.entity.Report;
 import com._thproject._thproject_web.postgresql.service.ReportService;
+import com._thproject._thproject_web.postgresql.dto.ReportResponseDto;
 
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import com._thproject._thproject_web.postgresql.dto.ReportResponseDto;
 
 import java.util.List;
 
@@ -23,15 +22,13 @@ import java.util.List;
 @ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 public class DicomDataController {
 
-    // --- [추가] Oracle Service ---
     private final PatientService patientService;
     private final StudyService studyService;
     private final SeriesService seriesService;
     private final ImageService imageService;
-    // --- [추가] PostgreSQL Service ---
     private final ReportService reportService;
 
-    // [수정] 생성자에 ReportService 주입을 추가합니다.
+    // 생성자는 변경 없이 그대로 유지됩니다.
     public DicomDataController(PatientService patientService, StudyService studyService,
                                SeriesService seriesService, ImageService imageService,
                                ReportService reportService) {
@@ -42,74 +39,98 @@ public class DicomDataController {
         this.reportService = reportService;
     }
 
-    // --- 최상위 Query Resolver (기존 코드) ---
+    // --- 최상위 Query Resolver 수정 ---
 
+    /**
+     * [신규] 여러 조건(pid, pname)으로 환자 목록을 검색하는 API입니다.
+     * GraphQL 스키마에 새로 추가한 'searchPatients' 쿼리를 처리합니다.
+     * @param pid 환자 ID (부분 검색)
+     * @param pname 환자 이름 (부분 검색)
+     * @return 검색 조건에 맞는 환자 DTO 목록
+     */
+    @QueryMapping
+    public List<PatientDto> searchPatients(@Argument String pid, @Argument String pname) {
+        return patientService.searchPatients(pid, pname);
+    }
+
+    /**
+     * [기존] 정확한 ID로 단일 환자를 조회하는 기능입니다.
+     * 이 기능은 그대로 유지되지만, 이제 주로 상세 정보 확인 등 다른 용도로 사용될 수 있습니다.
+     */
     @QueryMapping
     public PatientDto patient(@Argument String pid) {
         return patientService.getPatientByPid(pid);
     }
 
+    /**
+     * [기존] StudyKey로 단일 검사를 조회하는 기능입니다. (변경 없음)
+     */
     @QueryMapping
     public StudyDto study(@Argument Long studyKey) {
         return studyService.getStudyByStudyKey(studyKey);
     }
 
+    /**
+     * [기존] StudyKey와 SeriesKey로 단일 시리즈를 조회하는 기능입니다. (변경 없음)
+     */
     @QueryMapping
     public SeriesDto series(@Argument Long studyKey, @Argument Long seriesKey) {
         return seriesService.getSeriesByStudyKeyAndSeriesKey(studyKey, seriesKey);
     }
 
-    // --- 관계 필드 Resolver (SchemaMapping) (기존 코드) ---
-    // 이 부분의 코드를 /*...*/ 대신 실제 코드로 모두 채워넣었습니다.
 
+    // --- 관계 필드 Resolver (SchemaMapping) 수정 ---
+
+    /**
+     * [수정] Patient 타입의 'studies' 필드를 처리할 때, 날짜 범위 인자를 받도록 수정합니다.
+     * GraphQL 쿼리에서 'studies(studyDateStart: "...", studyDateEnd: "...")'와 같이 호출하면,
+     * 이 인자들을 StudyService로 전달하여 검사 목록을 필터링합니다.
+     * @param patient 부모 객체인 환자 정보
+     * @param studyDateStart 검색 시작일 (YYYY-MM-DD 형식)
+     * @param studyDateEnd 검색 종료일 (YYYY-MM-DD 형식)
+     * @return 필터링된 검사 DTO 목록
+     */
     @SchemaMapping(typeName = "Patient", field = "studies")
-    public List<StudyDto> getStudiesForPatient(PatientDto patient) {
-        return studyService.findStudiesByPid(patient.getPid());
+    public List<StudyDto> getStudiesForPatient(PatientDto patient,
+                                               @Argument String studyDateStart,
+                                               @Argument String studyDateEnd) {
+        // 수정된 StudyService의 findStudiesByPid 메소드를 호출합니다.
+        return studyService.findStudiesByPid(patient.getPid(), studyDateStart, studyDateEnd);
     }
+
+    // --- 아래의 SchemaMapping 메소드들은 변경 사항이 없습니다. ---
 
     @SchemaMapping(typeName = "Study", field = "series")
     public List<SeriesDto> getSeriesForStudy(StudyDto study) {
         return seriesService.findByStudyKey(study.getStudyKey());
     }
 
-    // Study 타입의 'patient' 필드가 요청될 때 (역참조)
     @SchemaMapping(typeName = "Study", field = "patient")
     public PatientDto getPatientForStudy(StudyDto study) {
         return patientService.getPatientByPid(study.getPid());
     }
 
-    // Series 타입의 'images' 필드가 요청될 때
     @SchemaMapping(typeName = "Series", field = "images")
     public List<ImageDto> getImagesForSeries(SeriesDto series) {
         return imageService.findBySeriesKey(series.getSeriesKey());
     }
 
-    // Series 타입의 'study' 필드가 요청될 때 (역참조)
     @SchemaMapping(typeName = "Series", field = "study")
     public StudyDto getStudyForSeries(SeriesDto series) {
         return studyService.getStudyByStudyKey(series.getStudyKey());
     }
 
-    // Image 타입의 'series' 필드가 요청될 때 (역참조)
     @SchemaMapping(typeName = "Image", field = "series")
     public SeriesDto getSeriesForImage(ImageDto image) {
         return seriesService.findBySeriesKey(image.getSeriesKey());
     }
 
-    // *** [핵심 수정 부분] 서로 다른 DB의 데이터를 연결하는 부분 ***
-    // Study 타입의 'report' 필드가 요청될 때
     @SchemaMapping(typeName = "Study", field = "report")
-    // --- [수정] 반환 타입을 엔티티(Report)에서 DTO(ReportResponseDto)로 변경 ---
     public ReportResponseDto getReportForStudy(StudyDto study) {
         if (study == null || study.getStudyKey() == null) {
             return null;
         }
-
-        // 1. StudyKey를 사용하여 PostgreSQL DB의 ReportService를 호출하고 '엔티티'를 받습니다.
         var reportEntity = reportService.getReportByStudyKey(study.getStudyKey());
-
-        // 2. 클라이언트에게 반환하기 전에 'DTO'로 변환합니다.
         return ReportResponseDto.fromEntity(reportEntity);
     }
-
 }

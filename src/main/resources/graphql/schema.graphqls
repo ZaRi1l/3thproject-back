@@ -20,7 +20,8 @@ type Patient {
     pname: String
     psex: String
     pbirthdate: String
-    studies: [Study]
+    # [수정] studies 필드가 studyDateStart와 studyDateEnd 인자를 받을 수 있다고 명시합니다.
+    studies(studyDateStart: String, studyDateEnd: String): [Study]
 }
 
 # StudyTab
@@ -113,15 +114,16 @@ input ReportInput {
 # ===================================================================
 # 데이터를 조회(Read)하는 API들을 한 곳에 정의합니다.
 type Query {
-    # [기존] Member 관련 API는 지금 상황에선 불필요하므로 주석 처리하거나 삭제합니다.
-    # findAllMembers: [Member]
-
-    # [기존] Oracle DB PACS 데이터 조회 API
+    # [기존] 단일 환자 조회 (정확한 ID 필요)
     patient(pid: ID!): Patient
+
+    # [추가] 여러 조건으로 환자 목록을 검색하는 API
+    # 모든 파라미터는 선택 사항입니다.
+    searchPatients(pid: String, pname: String, studyDateStart: String, studyDateEnd: String): [Patient]
+
+    # [기존] study, series 조회는 그대로 유지
     study(studyKey: ID!): Study
     series(studyKey: ID!, seriesKey: ID!): Series
-
-    # [추가] PostgreSQL DB 소견서 조회 API
     reportByStudyKey(studyKey: Long!): Report
 }
 
