@@ -93,9 +93,10 @@ public class DicomDataController {
     @SchemaMapping(typeName = "Patient", field = "studies")
     public List<StudyDto> getStudiesForPatient(PatientDto patient,
                                                @Argument String studyDateStart,
-                                               @Argument String studyDateEnd) {
+                                               @Argument String studyDateEnd,
+                                               @Argument String modality) {
         // 수정된 StudyService의 findStudiesByPid 메소드를 호출합니다.
-        return studyService.findStudiesByPid(patient.getPid(), studyDateStart, studyDateEnd);
+        return studyService.findStudiesByPid(patient.getPid(), studyDateStart, studyDateEnd, modality);
     }
 
     // --- 아래의 SchemaMapping 메소드들은 변경 사항이 없습니다. ---

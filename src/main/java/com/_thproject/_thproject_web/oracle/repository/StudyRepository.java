@@ -19,8 +19,12 @@ public interface StudyRepository extends JpaRepository<DummyEntity, Long> {
             "WHERE PID = :pid AND DELFLAG = 0 " +
             "  AND (:startDate IS NULL OR STUDYDATE >= :startDate) " +
             "  AND (:endDate IS NULL OR STUDYDATE <= :endDate) " +
+            "  AND (:modality = 'ALL' OR MODALITY = :modality) " +
             "ORDER BY STUDYDATE DESC, STUDYTIME DESC", nativeQuery = true)
     List<StudyDto> findStudiesByPid(@Param("pid") String pid,
                                     @Param("startDate") String startDate,
-                                    @Param("endDate") String endDate);
+                                    @Param("endDate") String endDate,
+                                    @Param("modality") String modality);
+
+
 }

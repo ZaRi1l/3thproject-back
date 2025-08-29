@@ -31,8 +31,8 @@ public class StudyService {
      * - 이 메소드는 GraphQL의 'Patient { studies }' 필드를 처리할 때 호출됩니다.
      */
     @Transactional(readOnly = true) // Oracle DB 트랜잭션
-    public List<StudyDto> findStudiesByPid(String pid, String startDate, String endDate) {
+    public List<StudyDto> findStudiesByPid(String pid, String startDate, String endDate, String modality) {
         // [수정] Repository를 호출할 때 날짜 파라미터를 함께 전달합니다.
-        return studyRepository.findStudiesByPid(pid, startDate, endDate);
+        return studyRepository.findStudiesByPid(pid, startDate, endDate, modality);
     }
 }

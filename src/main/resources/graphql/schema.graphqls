@@ -21,7 +21,7 @@ type Patient {
     psex: String
     pbirthdate: String
     # [수정] studies 필드가 studyDateStart와 studyDateEnd 인자를 받을 수 있다고 명시합니다.
-    studies(studyDateStart: String, studyDateEnd: String): [Study]
+    studies(studyDateStart: String, studyDateEnd: String,modality: String): [Study]
 }
 
 # StudyTab
