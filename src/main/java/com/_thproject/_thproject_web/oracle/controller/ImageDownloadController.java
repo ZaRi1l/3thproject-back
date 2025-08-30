@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -26,6 +27,7 @@ import java.util.Base64;
 
 @Tag(name = "DICOM Image Download API", description = "DICOM 이미지 파일 다운로드 및 보기 API")
 @RestController
+@ConditionalOnProperty(name = "spring.datasource.oracle.enabled", havingValue = "true")
 @RequestMapping("/api/images")
 @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8080"}, 
     allowedHeaders = {"Authorization", "Content-Type", "Accept", "X-Requested-With", "Cache-Control"},
