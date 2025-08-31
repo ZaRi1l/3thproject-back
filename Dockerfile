@@ -18,6 +18,10 @@ RUN ./gradlew build -x test --parallel --continue > /dev/null 2>&1 || true
 # 전체 소스 코드를 복사합니다.
 COPY src ./src
 
+# ★★★★★ 이 줄을 추가하세요! ★★★★★
+# gradlew 파일에 실행 권한(x)을 부여합니다.
+RUN chmod +x ./gradlew
+
 # 애플리케이션을 빌드하여 .jar 파일을 생성합니다. (-x test로 테스트는 생략)
 RUN ./gradlew build -x test
 
