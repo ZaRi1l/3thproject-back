@@ -34,8 +34,8 @@
 #### 맡은 역할
 | 이름 |업무|
 |:---:|---|
-|박규태|프론트엔드: 백엔드 API(GraphQL, REST)와 연동하여 의료 데이터를 조회하고, Cornerstone.js 기반의 DICOM 이미지 뷰어 및 분석 도구(Zoom, Pan 등)를 구현 <br>백엔드: Multi-Datasource 아키텍처 설계 (Oracle & PostgreSQL 동시 연동), 환자 정보 조회 GraphQL API 및 이미지 보안 전송 REST API 구축, JPA(CRUD)와 Native SQL(Read-Only)을 활용한 데이터 접근 로직 구현, Swagger API 문서화 <br>데브옵스/기타: AWS 기반 인프라 구축 (EC2, RDS), Docker & Github Actions 기반 CI/CD 파이프라인 구축, Spring Boot 및 Next.js의 환경별(dev/prod) 구성 관리, 프로젝트 리드미 작성|
-|김동현|프론트엔드: REST/GraphQL API를 연동하여 사용자 인증 흐름(로그인, 회원 생성) 및 환자 검색 기능을 개발, React Context API를 활용한 전역 로그인 상태 관리 구현 <br>백엔드: 애플리케이션 DB 설계(PostgreSQL), JWT와 Spring Security를 활용한 회원 인증 REST API 구축, GraphQL Resolver를 통해 이종 데이터베이스(Oracle, PostgreSQL)의 데이터를 조합하는 소견서 작성 API 개발 <br>기타: 발표 자료 제작 |
+|박규태|프론트엔드: 백엔드 API(GraphQL, REST)와 연동하여 의료 데이터를 조회하고, Cornerstone.js 기반의 DICOM 이미지 뷰어 및 분석 도구(Zoom, Pan 등)를 구현 <br>백엔드: Multi-Datasource 아키텍처 설계 (Oracle & PostgreSQL 동시 연동), 환자 정보 조회 GraphQL API 및 이미지 보안 전송 REST API 구축, JPA(CRUD)와 Native SQL(Read-Only)을 활용한 데이터 접근 로직 구현, Swagger API 문서화 <br>데브옵스/기타: AWS 기반 인프라 구축 (EC2, RDS), Docker & Github Actions 기반 CI/CD 파이프라인 구축, Spring Boot 및 Next.js의 환경별(dev/prod) 구성 관리, 프로젝트 리드미 작성, Class Diagram 작성|
+|김동현|프론트엔드: REST/GraphQL API를 연동하여 사용자 인증 흐름(로그인, 회원 생성) 및 환자 검색 기능을 개발, React Context API를 활용한 전역 로그인 상태 관리 구현 <br>백엔드: 애플리케이션 DB 설계(PostgreSQL), JWT와 Spring Security를 활용한 회원 인증 REST API 구축, GraphQL Resolver를 통해 이종 데이터베이스(Oracle, PostgreSQL)의 데이터를 조합하는 소견서 작성 API 개발 <br>기타: 발표 자료 제작, Usecase Diagram 작성|
 |김윤진|프론트엔드: 프로젝트의 전체 UX/UI 및 레이아웃 설계를 총괄, CSS Modules를 활용하여 로그인, 메인 대시보드, 뷰어, 관리자 페이지 등 모든 핵심 페이지의 UI 개발과 반응형 웹 디자인을 담당|
 
 ## 개발환경
