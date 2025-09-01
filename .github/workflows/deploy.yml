@@ -6,13 +6,20 @@ name: Backend CI/CD Pipeline
 # ===================================================================
 # 'main' 브랜치와 관련된 특정 이벤트가 발생했을 때 이 워크플로우를 실행합니다.
 on:
-  # 조건 1: 'main' 브랜치에 직접 코드가 푸시(push)되었을 때
+  # 1. main 브랜치에 직접 push 할 때
   push:
-    branches: [ "main" ]
-  # 조건 2: 'main' 브랜치로 향하는 Pull Request가 닫혔을 때 (Merge 될 때를 포함)
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'  # 모든 마크다운 파일 무시
+      - 'docs/**'  # docs 폴더 아래의 모든 변경 무시
+
+  # 2. main 브랜치로 Pull Request가 merge 될 때
   pull_request:
-    branches: [ "main" ]
-    types: [ closed ]
+    types: [ closed ] # PR이 닫혔을 때 (merged 또는 unmerged)
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
 
 # ===================================================================
 #  2. 실행될 작업 (Jobs)
