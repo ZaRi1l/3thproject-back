@@ -17,7 +17,7 @@
 ### 주요 기능 (Key Features)
 | 기능 | 설명 | 관련 기술 |
 | :---: | --- | :---: |
-| **보안 인증 및 인가** | Spring Security와 **JWT(JSON Web Token)**를 결합하여 견고한 인증/인가 시스템을 구현했습니다. 사용자의 역할(의료진)에 따라 접근 권한을 제어하여 민감한 의료 데이터를 안전하게 보호합니다.| `Spring Security`, `JWT`|
+| **보안 인증 및 인가** | Spring Security와 **JWT**(JSON Web Token)를 결합하여 견고한 인증/인가 시스템을 구현했습니다. 사용자의 역할(의료진)에 따라 접근 권한을 제어하여 민감한 의료 데이터를 안전하게 보호합니다.| `Spring Security`, `JWT`|
 | **하이브리드 API 설계**| **GraphQL과 REST API를 목적에 맞게 함께 사용**하는 하이브리드 방식을 채택했습니다. 복잡하게 연관된 의료 데이터(환자-연구-시리즈) 조회는 **GraphQL**로, 의사 소견서 작성이나 이미지 파일 요청처럼 명확한 기능은 **REST API**로 처리하여 API를 최적화했습니다.| `GraphQL`, `REST API`, `Spring Boot`|
 | **인터랙티브 DICOM 이미지 뷰어**| 전문 라이브러리인 **Cornerstone.js API를 활용**하여 DICOM 이미지를 렌더링하고, 필수 분석 도구(Zoom, Pan, Windowing 등)를 제공합니다. 또한, 실제 파일 경로를 숨기기 위해 **서버에서 디코딩 과정을 거쳐 이미지를 안전하게 스트리밍하는 보안 전송 메커니즘**을 REST API로 직접 구현했습니다. | `Cornerstone.js`, `REST API`, `Spring Boot`|
 | **분산 데이터 통합 조회**| 학교 DB(Oracle)의 **환자/연구 정보**와 AWS RDS(PostgreSQL)의 **의사 소견 정보**를 백엔드에서 **실시간으로 통합**하여, 사용자에게는 하나의 완성된 정보처럼 보여주는 기능을 구현했습니다.  | `Spring Boot`, `JPA`, `JPQL`|
@@ -34,9 +34,9 @@
 #### 맡은 역할
 | 이름 |업무|
 |:---:|---|
-|박규태|프론트엔드: 백엔드 API 연동 기반의 이미지 로딩 및 뷰잉 워크플로우 전체 구현, Cornerstone.js를 활용한 DICOM 이미지 뷰어 및 분석 도구(Zoom, Pan 등) 최종 개발 <br>백엔드: Multi-Datasource 아키텍처 설계 (Oracle & PostgreSQL 동시 연동), Native SQL 기반 Oracle DB 데이터 조회 로직 구현, 환자 정보 조회를 위한 GraphQL API 및 이미지 보안 전송 REST API 구축, Swagger API 문서화 <br>데브옵스/기타: AWS 기반 인프라 구축 (EC2, RDS), Docker & Github Actions 기반 CI/CD 파이프라인 구축, Spring Boot 및 Next.js의 환경별(dev/prod) 구성 관리, 프로젝트 리드미 작성, Class Diagram 작성|
-|김동현|프론트엔드: REST/GraphQL API를 연동하여 사용자 인증 흐름(로그인, 회원 생성) 구현, 환자 검색(이름, ID, 날짜)부터 Study/Series로 이어지는 계층적 데이터 탐색(Drill-down) UI 및 소견서 작성/조회 기능을 포함한 핵심 워크플로우를 개발, React Context API를 활용한 전역 로그인 상태 관리 구현 <br>백엔드: PostgreSQL DB 설계 및 JPA를 활용한 데이터 CRUD 계층 전체 구현, JWT와 Spring Security를 활용한 회원 인증 REST API 구축, GraphQL Resolver를 통해 이종 데이터베이스(Oracle, PostgreSQL)의 데이터를 조합하는 소견서 작성 API 개발 <br>기타: 발표 자료 제작, Usecase Diagram 작성|
-|김윤진|프론트엔드: 프로젝트의 전체 UX/UI 및 레이아웃 설계를 총괄, CSS Modules를 활용하여 로그인, 메인 대시보드, 뷰어, 관리자 페이지 등 모든 핵심 페이지의 UI 개발과 반응형 웹 디자인을 담당, DICOM 뷰어의 초기 기술 검증(PoC) 및 로컬 이미지 렌더링 프로토타입을 구현|
+|박규태|**프론트엔드**: 백엔드 API 연동 기반의 이미지 로딩 및 뷰잉 워크플로우 전체 구현, Cornerstone.js를 활용한 DICOM 이미지 뷰어 및 분석 도구(Zoom, Pan 등) 최종 개발 <br>**백엔드**: Multi-Datasource 아키텍처 설계 (Oracle & PostgreSQL 동시 연동), Native SQL 기반 Oracle DB 데이터 조회 로직 구현, 환자 정보 조회를 위한 GraphQL API 및 이미지 보안 전송 REST API 구축, Swagger API 문서화 <br>**데브옵스/기타**: AWS 기반 인프라 구축 (EC2, RDS), Docker & Github Actions 기반 CI/CD 파이프라인 구축, Spring Boot 및 Next.js의 환경별(dev/prod) 구성 관리, 프로젝트 리드미 작성, Class Diagram 작성|
+|김동현|**프론트엔드**: REST/GraphQL API를 연동하여 사용자 인증 흐름(로그인, 회원 생성) 구현, 환자 검색(이름, ID, 날짜)부터 Study/Series로 이어지는 계층적 데이터 탐색(Drill-down) UI 및 소견서 작성/조회 기능을 포함한 핵심 워크플로우를 개발, React Context API를 활용한 전역 로그인 상태 관리 구현 <br>**백엔드**: PostgreSQL DB 설계 및 JPA를 활용한 데이터 CRUD 계층 전체 구현, JWT와 Spring Security를 활용한 회원 인증 REST API 구축, GraphQL Resolver를 통해 이종 데이터베이스(Oracle, PostgreSQL)의 데이터를 조합하는 소견서 작성 API 개발 <br>**기타**: 발표 자료 제작, Usecase Diagram 작성|
+|김윤진|**프론트엔드**: 프로젝트의 전체 UX/UI 및 레이아웃 설계를 총괄, CSS Modules를 활용하여 로그인, 메인 대시보드, 뷰어, 관리자 페이지 등 모든 핵심 페이지의 UI 개발과 반응형 웹 디자인을 담당, DICOM 뷰어의 초기 기술 검증(PoC) 및 로컬 이미지 렌더링 프로토타입을 구현|
 
 ## 개발환경
 | Backend | Frontend | DB | VCS | CSP |
