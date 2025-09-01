@@ -1,9 +1,9 @@
-## ShopSphere Project
+## VisiDoc
 <div style="text-align: center;">
     <img alt="shopshere_main" src="https://github.com/user-attachments/assets/bf3efd80-989e-4ac8-837d-9eff685e74c5" />
 </div>
 
-##### 프로젝트 소개
+## 프로젝트 소개
 ### "분산된 데이터베이스와 전문적인 의료 API를 어떻게 하나의 완벽한 웹 서비스로 통합할 수 있을까?" 이 질문이 바로 저희 VisiDoc의 핵심 과제였습니다. 
 
 저희는 이미 웹에서 강력한 기능을 제공하는 PacsPlus를 벤치마킹하여, 최신 기술 스택으로 안정적인 의료 이미지 조회 시스템을 구축하는 것을 목표로 삼았습니다. 이를 위해 Spring Boot의 견고한 백엔드와 Next.js(React)의 유연한 프론트엔드를 선택했습니다.
@@ -13,6 +13,16 @@
 ##### 사이트 주소: http://43.202.185.167/login  (기능 제한)
 ##### 설치 방법: <a href="/dosc/설치방법/README.md" target="_blank">설치방법</a>
 <br>
+
+### 주요 기능 (Key Features)
+| 기능 | 설명 | 관련 기술 |
+| :---: | --- | :---: |
+| **보안 인증 및 인가** | Spring Security와 **JWT(JSON Web Token)**를 결합하여 견고한 인증/인가 시스템을 구현했습니다. 사용자의 역할(의료진)에 따라 접근 권한을 제어하여 민감한 의료 데이터를 안전하게 보호합니다.| `Spring Security`, `JWT`|
+| **하이브리드 API 설계**| **GraphQL과 REST API를 목적에 맞게 함께 사용**하는 하이브리드 방식을 채택했습니다. 복잡하게 연관된 의료 데이터(환자-연구-시리즈) 조회는 **GraphQL**로, 의사 소견서 작성이나 이미지 파일 요청처럼 명확한 기능은 **REST API**로 처리하여 API를 최적화했습니다.| `GraphQL`, `REST API`, `Spring Boot`|
+| **인터랙티브 DICOM 이미지 뷰어**| 전문 라이브러리인 **Cornerstone.js API를 활용**하여 DICOM 이미지를 렌더링하고, 필수 분석 도구(Zoom, Pan, Windowing 등)를 제공합니다. 또한, 실제 파일 경로를 숨기기 위해 **서버에서 디코딩 과정을 거쳐 이미지를 안전하게 스트리밍하는 보안 전송 메커니즘**을 REST API로 직접 구현했습니다. | `Cornerstone.js`, `REST API`, `Spring Boot`|
+| **분산 데이터 통합 조회**| 학교 DB(Oracle)의 **환자/연구 정보**와 AWS RDS(PostgreSQL)의 **의사 소견 정보**를 백엔드에서 **실시간으로 통합**하여, 사용자에게는 하나의 완성된 정보처럼 보여주는 기능을 구현했습니다.  | `Spring Boot`, `JPA`, `JPQL`|
+| **목적 중심의 데이터베이스 아키텍처** | **학교 서버(Oracle DB)의 PACS 연동 데이터**와 자체적으로 구축한 **AWS RDS(PostgreSQL)의 애플리케이션 데이터(의사 정보, 소견서 등)를 물리적으로 분리**하여 설계했습니다. 이를 통해 데이터의 성격에 따라 관리 포인트를 분리하고 시스템의 유연성을 확보했습니다.| `Multi-Datasource`, `Oracle DB`, `PostgreSQL` |
+
 <br>
 <br>
 
@@ -24,10 +34,9 @@
 #### 맡은 역할
 | 이름 |업무|
 |:---:|---|
-|최진환| 로그인/회원가입 프론트엔드, 로그인/회원가입 백엔드, 상품검색 프론트엔드, 상품검색 백엔드, 상품등록 프론트엔드, 상품정보 프론트엔드, 상품정보 백엔드, 상품구매 백엔드, 상품구매 프론트엔드, 리뷰&별점 프론트엔드, 배포/운영, CI/CD, ppt만들기, 유스케이스 다이어그램
-|김동현|DB구축, 카카오 로그인 구현, 토스 페이먼츠 구현, 장바구니 프론트엔드, 구매내역 ID 띄우기, 시퀀스 다이어그램, 클래스 다이어그램, E-R 다이어그램, 해상도를 고려한 CSS 수정
-|김윤진|상품정보 페이지, 장바구니 프론트엔드, 장바구니 벡엔드, 1:1 문의 구매자Ver, 요구사항, 깃 레파지토리 README.md
-|박규태|로그인/회원가입 백엔드, 상품검색 백엔드, 상품등록 백엔드, 상품정보 백엔드, 상품구매 백엔드, 장바구니 백엔드, 리뷰&별점 백엔드, 판매 통계 백엔드, 판매 통계 프론트엔드, 상품등록 옵션, 1:1 문의 판매자Ver, 챗봇, 실시간 1:1 문의 웹소켓(프론트,백엔드)
+|박규태|프론트엔드: 백엔드 API(GraphQL, REST)와 연동하여 의료 데이터를 조회하고, Cornerstone.js 기반의 DICOM 이미지 뷰어 및 분석 도구(Zoom, Pan 등)를 구현 <br>백엔드: Multi-Datasource 아키텍처 설계 (Oracle & PostgreSQL 동시 연동), 환자 정보 조회 GraphQL API 및 이미지 보안 전송 REST API 구축, JPA(CRUD)와 Native SQL(Read-Only)을 활용한 데이터 접근 로직 구현, Swagger API 문서화 <br>데브옵스/기타: AWS 기반 인프라 구축 (EC2, RDS), Docker & Github Actions 기반 CI/CD 파이프라인 구축, Spring Boot 및 Next.js의 환경별(dev/prod) 구성 관리, 프로젝트 리드미 작성|
+|김동현|프론트엔드: REST/GraphQL API를 연동하여 사용자 인증 흐름(로그인, 회원 생성) 및 환자 검색 기능을 개발하고, React Context API를 활용한 전역 로그인 상태 관리 구현 <br>백엔드: 애플리케이션 DB 설계(PostgreSQL), JWT와 Spring Security를 활용한 회원 인증 REST API 구축, GraphQL Resolver를 통해 이종(異種) 데이터베이스(Oracle, PostgreSQL)의 데이터를 조합하는 소견서 작성 API 개발 <br>기타: 발표 자료 제작 |
+|김윤진|프론트엔드:  <br>백엔드:  <br>기타:  |
 
 ## 개발환경
 | Backend | Frontend | DB | VCS | CSP |
