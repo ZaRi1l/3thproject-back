@@ -38,6 +38,7 @@
 |김동현|**프론트엔드**: REST/GraphQL API를 연동하여 사용자 인증 흐름(로그인, 회원 생성) 구현, 환자 검색(이름, ID, 날짜)부터 Study/Series로 이어지는 계층적 데이터 탐색(Drill-down) UI 및 소견서 작성/조회 기능을 포함한 핵심 워크플로우를 개발, React Context API를 활용한 전역 로그인 상태 관리 구현 <br>**백엔드**: PostgreSQL DB 설계 및 JPA를 활용한 데이터 CRUD 계층 전체 구현, JWT와 Spring Security를 활용한 회원 인증 REST API 구축, GraphQL Resolver를 통해 이종 데이터베이스(Oracle, PostgreSQL)의 데이터를 조합하는 소견서 작성 API 개발 <br>**기타**: 발표 자료 제작, 영상 촬영, Usecase Diagram 작성|
 |김윤진|**프론트엔드**: 프로젝트의 전체 UX/UI 및 레이아웃 설계를 총괄, CSS Modules를 활용하여 로그인, 메인 대시보드, 뷰어, 관리자 페이지 등 모든 핵심 페이지의 UI 개발과 반응형 웹 디자인을 담당, DICOM 뷰어의 초기 기술 검증(PoC) 및 로컬 이미지 렌더링 프로토타입을 구현|
 
+<br><br>
 ## 💻 개발 환경
 
 | Backend | Frontend | Database | VCS | DevOps | CSP |
@@ -50,33 +51,48 @@
 |<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="65" alt="Java"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="65" alt="TypeScript"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="65" alt="JavaScript"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="65" alt="HTML"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="65" alt="CSS"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" width="85" alt="IntelliJ"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="85" alt="VSCode"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg" width="85" alt="Gradle"/> <img src="https://img.icons8.com/color/96/npm.png" width="85" alt="NPM"/>|
 |Java, TypeScript, JS, HTML, CSS|IntelliJ, VSCode|Gradle, NPM|
 
-#### 개발환경 상세     
-|환경|사용|버전|
-|:---:|:---:|:---:|
-| **OS** |<img src="https://img.shields.io/badge/OS%20Independent-gray?style=for-the-badge"/>|Windows, macOS, Linux 무관|
-| **프론트엔드** | <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>|19.1.0|
-| **라우팅** | <img src="https://img.shields.io/badge/React%20Router%20DOM-CA4245?style=for-the-badge&logo=react-router&logoColor=white"/>|7.6.0|
-| **CSS** | <img src="https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/>| - |
-| **상태 관리** | <img src="https://img.shields.io/badge/zustand-000000?style=for-the-badge"/>| - |
-| **결제** | <img src="https://img.shields.io/badge/Toss%20Payments-000000?style=for-the-badge"/>|1.9.1|
-| **테스트** | <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"/> <img src="https://img.shields.io/badge/Testing%20Library-E33332?style=for-the-badge"/>| - |
-| **빌드** | <img src="https://img.shields.io/badge/CRACO-000000?style=for-the-badge"/> <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"/>| - |
-| **IDE** | <img src="https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white"/>| - |
-| **Server** | <img src="https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black"/>|Spring Boot 내장 Tomcat|
-| **CSP** | <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white"/> | - |
-| **VCS** | <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/> | - |
-| <hr> | <hr> | <hr> |
-| **Backend** | <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white"/> | `3.4.5` |
-| **Language (BE)** | <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>| JDK: `17`|
-| **Build Tool (BE)** | <img src="https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=gradle&logoColor=white"/> | - |
-| <hr> | <hr> | <hr> |
-| **Frontend** | <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>| React: `18.2.0` |
-| **Language (FE)** | <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/> | ES6+, JSX |
-| **Package Manager**| <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"/> | - |
-| **Library (FE)** | <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/> <img src="https://img.shields.io/badge/stompjs-E33A2B?style=for-the-badge"/> | axios, @stomp/stompjs, sockjs-client |
-| <hr> | <hr> | <hr> |
-| **DB** | <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white"/>| - |
+<br>
 
+### ⚙️ 개발 환경 상세
+
+#### Backend
+
+| 구분 | 사용 기술 | 버전 |
+|:---:|:---|:---:|
+| **Framework** | <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white"/> | 3.5.4 |
+| **Language** | <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white"/> | 24 |
+| **API** | <img src="https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white"/> <img src="https://img.shields.io/badge/REST%20API-000000?style=for-the-badge"/> | - |
+| **Data Access** | <img src="https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=for-the-badge"/> | - |
+| **Security** | <img src="https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white"/> <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white"/> | - |
+| **API Docs** | <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black"/> | 2.8.9 |
+| **File Access** | <img src="https://img.shields.io/badge/JCIFS--NG-blue?style=for-the-badge"/> | 2.1.10 |
+| **Build Tool** | <img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"/> | - |
+
+<br>
+
+#### Frontend
+
+| 구분 | 사용 기술 | 버전 |
+|:---:|:---|:---:|
+| **Framework**| <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white"/> | 15.4.6 |
+| **Library** | <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"/> | 19.1.0 |
+| **Language** | <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/> | ^5 / ES6+ |
+| **Data Fetching** | <img src="https://img.shields.io/badge/Apollo%20Client-311C87?style=for-the-badge&logo=apollo-graphql&logoColor=white"/> <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/> | 3.10.4 / 1.11.0 |
+| **DICOM Viewer** | <img src="https://img.shields.io/badge/Cornerstone.js-000000?style=for-the-badge"/> | ^3.33.2 |
+| **Package Manager**| <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"/> | - |
+
+<br>
+
+#### Infrastructure & DevOps
+
+| 구분 | 사용 기술 |
+|:---:|:---|
+| **Cloud Provider** | <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white"/> |
+| **Used Services** | <img src="https://img.shields.io/badge/EC2-FF9900?style=for-the-badge&logo=amazon-ec2&logoColor=white"/> <img src="https://img.shields.io/badge/RDS-527FFF?style=for-the-badge&logo=amazon-rds&logoColor=white"/> |
+| **Database** | <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white"/> <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white"/> |
+| **CI/CD** | <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white"/> |
+| **Containerization**| <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/> |
+| **VCS & IDE** | <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/IntelliJ%20IDEA-000000?style=for-the-badge&logo=intellij-idea&logoColor=white"/> <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white"/> |
 
 <br><br>
 ## 요구사항
