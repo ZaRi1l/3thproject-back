@@ -34,20 +34,21 @@
 #### 맡은 역할
 | 이름 |업무|
 |:---:|---|
-|박규태|**프론트엔드**: 백엔드 API 연동 기반의 이미지 로딩 및 뷰잉 워크플로우 전체 구현, Cornerstone.js를 활용한 DICOM 이미지 뷰어 및 분석 도구(Zoom, Pan 등) 최종 개발 <br>**백엔드**: Multi-Datasource 아키텍처 설계 (Oracle & PostgreSQL 동시 연동), Native SQL 기반 Oracle DB 데이터 조회 로직 구현, 환자 정보 조회를 위한 GraphQL API 및 이미지 보안 전송 REST API 구축, Swagger API 문서화 <br>**데브옵스**: AWS 기반 인프라 구축 (EC2, RDS), Docker & Github Actions 기반 CI/CD 파이프라인 구축, Spring Boot 및 Next.js의 환경별(dev/prod) 구성 관리 <br>**기타**: 프로젝트 리드미 및 Class Diagram 작성|
-|김동현|**프론트엔드**: REST/GraphQL API를 연동하여 사용자 인증 흐름(로그인, 회원 생성) 구현, 환자 검색(이름, ID, 날짜)부터 Study/Series로 이어지는 계층적 데이터 탐색(Drill-down) UI 및 소견서 작성/조회 기능을 포함한 핵심 워크플로우를 개발, React Context API를 활용한 전역 로그인 상태 관리 구현 <br>**백엔드**: PostgreSQL DB 설계 및 JPA를 활용한 데이터 CRUD 계층 전체 구현, JWT와 Spring Security를 활용한 회원 인증 REST API 구축, GraphQL Resolver를 통해 이종 데이터베이스(Oracle, PostgreSQL)의 데이터를 조합하는 소견서 작성 API 개발 <br>**기타**: 발표 자료 제작, Usecase Diagram 작성|
+|박규태|**프론트엔드**: 백엔드 API 연동 기반의 이미지 로딩 및 뷰잉 워크플로우 전체 구현, Cornerstone.js를 활용한 DICOM 이미지 뷰어 및 분석 도구(Zoom, Pan 등) 최종 개발 <br>**백엔드**: Multi-Datasource 아키텍처 설계 (Oracle & PostgreSQL 동시 연동), Native SQL 기반 Oracle DB 데이터 조회 로직 구현, 환자 정보 조회를 위한 GraphQL API 및 이미지 보안 전송 REST API 구축, Swagger API 문서화 <br>**데브옵스**: AWS 기반 인프라 구축 (EC2, RDS), Docker & Github Actions 기반 CI/CD 파이프라인 구축, Spring Boot 및 Next.js의 환경별(dev/prod) 구성 관리 <br>**기타**: 영상 편집, 프로젝트 리드미 작성, Class Diagram 작성|
+|김동현|**프론트엔드**: REST/GraphQL API를 연동하여 사용자 인증 흐름(로그인, 회원 생성) 구현, 환자 검색(이름, ID, 날짜)부터 Study/Series로 이어지는 계층적 데이터 탐색(Drill-down) UI 및 소견서 작성/조회 기능을 포함한 핵심 워크플로우를 개발, React Context API를 활용한 전역 로그인 상태 관리 구현 <br>**백엔드**: PostgreSQL DB 설계 및 JPA를 활용한 데이터 CRUD 계층 전체 구현, JWT와 Spring Security를 활용한 회원 인증 REST API 구축, GraphQL Resolver를 통해 이종 데이터베이스(Oracle, PostgreSQL)의 데이터를 조합하는 소견서 작성 API 개발 <br>**기타**: 발표 자료 제작, 영상 촬영, Usecase Diagram 작성|
 |김윤진|**프론트엔드**: 프로젝트의 전체 UX/UI 및 레이아웃 설계를 총괄, CSS Modules를 활용하여 로그인, 메인 대시보드, 뷰어, 관리자 페이지 등 모든 핵심 페이지의 UI 개발과 반응형 웹 디자인을 담당, DICOM 뷰어의 초기 기술 검증(PoC) 및 로컬 이미지 렌더링 프로토타입을 구현|
 
-## 개발환경
-| Backend | Frontend | DB | VCS | CSP |
-|:---:|:---:|:---:|:---:|:---:|
-|<img src="https://img.icons8.com/color/96/spring-logo.png" width="100" alt="Spring Boot"/>|<img src="https://img.icons8.com/color/96/react-native.png" width="100" alt="React"/>|<img src="https://img.icons8.com/color/96/maria-db.png" width="100" alt="MariaDB"/>|<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>|<img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white"/>|
-|Spring Boot|React|MariaDB|GitHub|AWS|
+## 💻 개발 환경
+
+| Backend | Frontend | Database | VCS | DevOps | CSP |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="85" alt="Spring Boot"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="85" alt="React"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="85" alt="Next.js"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" width="85" alt="Oracle"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="85" alt="PostgreSQL"/>|<img src="https://img.icons8.com/?size=100&id=SzgQDfObXUbA&format=png&color=000000" width="85" alt="GitHub"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="85" alt="Docker"/> <img src="https://github.com/user-attachments/assets/049397db-83c1-4a91-9365-a9f3bd1e92ef" width="85" alt="Github Actions"/> |<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" width="85" alt="AWS"/>|
+|Spring Boot|React, Next.js|Oracle, PostgreSQL|GitHub|Docker, GitHub Actions|AWS|
 
 | Language | IDE | Build Tool |
 |:---:|:---:|:---:|
-|<img src="https://img.icons8.com/color/70/java-coffee-cup-logo.png" width="70" alt="Java"/> <img src="https://img.icons8.com/color/70/javascript.png" width="70" alt="JavaScript"/> <img src="https://img.icons8.com/color/70/html-5.png" width="70" alt="HTML"/> <img src="https://img.icons8.com/color/70/css3.png" width="70" alt="CSS"/>|<img src="https://img.icons8.com/color/96/visual-studio-code-2019.png" width="100" alt="VSCode"/>|<img src="https://simpleicons.org/icons/gradle.svg" width="70" alt="Gradle"/> <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"/>|
-|Java, JavaScript, HTML, CSS|VSCode|Gradle, NPM|
+|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="65" alt="Java"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="65" alt="TypeScript"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="65" alt="JavaScript"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="65" alt="HTML"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="65" alt="CSS"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" width="85" alt="IntelliJ"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="85" alt="VSCode"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg" width="85" alt="Gradle"/> <img src="https://img.icons8.com/color/96/npm.png" width="85" alt="NPM"/>|
+|Java, TypeScript, JS, HTML, CSS|IntelliJ, VSCode|Gradle, NPM|
 
 #### 개발환경 상세     
 |환경|사용|버전|
