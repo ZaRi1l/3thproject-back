@@ -41,10 +41,15 @@
 <br><br>
 ## 💻 개발 환경
 
-| Backend | Frontend | Database | VCS | DevOps | CSP |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="85" alt="Spring Boot"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="85" alt="React"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="85" alt="Next.js"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" width="85" alt="Oracle"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="85" alt="PostgreSQL"/>|<img src="https://img.icons8.com/?size=100&id=SzgQDfObXUbA&format=png&color=000000" width="85" alt="GitHub"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="85" alt="Docker"/> <img src="https://cdn.simpleicons.org/githubactions/2088ff" width="85" alt="Github Actions"/> |<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" width="85" alt="AWS"/>|
-|Spring Boot|React, Next.js|Oracle, PostgreSQL|GitHub|Docker, GitHub Actions|AWS|
+| Backend | Frontend | VCS |
+|:---:|:---:|:---:|
+|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="85" alt="Spring Boot"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="85" alt="React"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width="85" alt="Next.js"/>|<img src="https://img.icons8.com/?size=100&id=SzgQDfObXUbA&format=png&color=000000" width="85" alt="GitHub"/>|
+|Spring Boot|React, Next.js|GitHub|
+
+| CSP | Database | DevOps |
+|:---:|:---:|:---:|
+|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" width="85" alt="AWS"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" width="85" alt="Oracle"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="85" alt="PostgreSQL"/>|<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="85" alt="Docker"/> <img src="https://cdn.simpleicons.org/githubactions/2088ff" width="85" alt="Github Actions"/> |
+|AWS|Oracle, PostgreSQL|Docker, GitHub Actions|
 
 | Language | IDE | Build Tool |
 |:---:|:---:|:---:|
