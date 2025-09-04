@@ -98,7 +98,7 @@
 ## 요구사항
 
 <div style="text-align: center;">
-    <img height="500px" src="dosc/소프트웨어 설계/요구사항.png" alt="alt text" />
+    <img height="500px" src="./docs/Diagram/Usecase Diagram/유즈케이스%20다이어그램.png" alt="alt text" />
 </div>
 
 #### 요구사항 분석(기능 정리)
@@ -127,7 +127,7 @@
 <br><br>
 
 ## 소프트웨어 설계
-주소: 
+<a href="./docs/Diagram/" target="_blank">소프트웨어 설계</a>
 <br>
 
 <br><br>
