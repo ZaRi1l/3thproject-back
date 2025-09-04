@@ -70,6 +70,7 @@ jobs:
           # 이미지 태그: [DockerHub아이디]/[레포지토리명]:latest 형식
           # ★★★★★ 'my-app-backend'를 본인이 Docker Hub에 만든 레포지토리 이름으로 수정하세요! ★★★★★
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/3thproject-back:latest
+          no-cache: true  # 캐시 안씀
 
       # -------------------------------------------------------------------
       #  단계 3: EC2 서버에 배포
