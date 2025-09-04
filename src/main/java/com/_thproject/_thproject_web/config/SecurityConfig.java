@@ -70,13 +70,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+
+                // CORS 설정 적용
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                
                 // CSRF, Form Login, HTTP Basic 인증 비활성화 (JWT 사용을 위함)
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
-
-                // CORS 설정 적용
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 // 세션을 사용하지 않도록 설정 (STATELESS)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
