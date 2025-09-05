@@ -1,6 +1,6 @@
 # 1단계: Gradle을 사용하여 애플리케이션 빌드 (Builder Stage)
 # Java 24 JDK가 포함된 공식 Eclipse Temurin 이미지를 사용합니다.
-FROM eclipse-temurin:24-jdk AS builder
+FROM eclipse-temurin:21-jdk AS builder
 
 # 작업 디렉토리 설정
 WORKDIR /workspace/app
