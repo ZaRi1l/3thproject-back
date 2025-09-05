@@ -8,6 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com._thproject._thproject_web.postgresql.dto.UserResponseDto;
+import com._thproject._thproject_web.postgresql.entity.User;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +41,12 @@ public class UserService {
 
         // 응답 DTO로 변환하여 반환
         return UserResponseDto.from(savedUser);
+    }
+    @Transactional(readOnly = true)
+    public List<UserResponseDto> findAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(UserResponseDto::from) // User 엔티티를 UserResponseDto로 변환
+                .collect(Collectors.toList());
     }
 }
