@@ -27,7 +27,7 @@ RUN ./gradlew build -x test
 
 # 2단계: 실제 실행을 위한 최소한의 이미지 생성 (Final Stage)
 # JDK가 아닌 JRE(Java Runtime Environment)만 포함된 더 가벼운 이미지를 사용합니다.
-FROM eclipse-temurin:24-jre
+FROM eclipse-temurin:21-jre
 
 # 작업 디렉토리 설정
 WORKDIR /app
