@@ -12,8 +12,8 @@ COPY build.gradle .
 COPY settings.gradle .
 
 # 필요한 의존성을 다운로드합니다.
-# 이렇게 하면 소스 코드가 변경되어도 매번 의존성을 새로 받지 않아 효율적입니다.
-RUN ./gradlew build -x test --parallel --continue > /dev/null 2>&1 || true
+# 소스 코드 없이 의존성만 먼저 다운로드 (빌드 속도 향상을 위함)
+RUN ./gradlew dependencies
 
 # 전체 소스 코드를 복사합니다.
 COPY src ./src
