@@ -79,20 +79,14 @@ jobs:
             echo "DB_PASSWORD_PROD=${{ secrets.DB_PASSWORD_PROD }}" >> .env
             
             # 2. CI에서 빌드한 백엔드 이미지의 정확한 다이제스트를 환경 변수로 지정
-            export IMAGE_TAG_BACK="@${{ steps.build-and-push.outputs.digest }}"
-            echo "Deploying Backend with Image Digest: ${IMAGE_TAG_BACK}"
+            # export IMAGE_TAG_BACK="@${{ steps.build-and-push.outputs.digest }}"
+            # echo "Deploying Backend with Image Digest: ${IMAGE_TAG_BACK}"
 
-            # 3. Docker Hub 로그인 (pull 권한 문제 방지)
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            IMAGE_TAG_BACK="@${{ steps.build-and-push.outputs.digest }}" \
+            docker compose pull backend # 특정 서비스만 pull 할 수 있습니다.
 
-            # 4. 이전 컨테이너 중지 및 삭제
-            docker compose down
-
-            # 5. docker-compose.yml에 명시된 이미지(이제 다이제스트로 지정됨)를 강제로 pull
-            docker compose pull
-
-            # 6. 새로운 이미지로 컨테이너를 다시 생성하고 실행
-            docker compose up -d --force-recreate
+            IMAGE_TAG_BACK="@${{ steps.build-and-push.outputs.digest }}" \
+            docker compose up -d --force-recreate 
 
             # 7. 사용하지 않는 구버전 이미지들 삭제 (디스크 용량 확보)
             docker image prune -af
