@@ -56,10 +56,8 @@ jobs:
         id: build-and-push # 이 단계에 ID를 부여합니다.
         uses: docker/build-push-action@v4
         with:
-          # [수정] 빌드 컨텍스트를 백엔드 디렉토리로 정확히 지정
-          context: ./backend 
-          # [추가] 사용할 Dockerfile 경로를 명시 (컨텍스트 내 경로)
-          file: ./backend/Dockerfile 
+          context: .
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/3thproject-back:latest
           no-cache: true
