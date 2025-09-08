@@ -226,8 +226,6 @@ docker-compose logs -f backend
 -   **프론트엔드**: `http://localhost` (또는 `http://localhost:80`)
 -   **백엔드 API 문서**: `http://localhost:8080/swagger-ui/index.html`
 
-> **🎉 축하합니다!** 이제 자신의 환경에 맞는 VisiDoc 개발 환경 설정이 완료되었습니다. `localDev`와 `prod` 프로필을 전환하고 싶다면, `.env` 파일의 `SPRING_PROFILES_ACTIVE` 값을 변경한 후 `docker-compose up --build -d`를 다시 실행하면 됩니다.
-
 
 
 ---
@@ -247,7 +245,7 @@ Docker 없이 각 서버를 직접 실행하는 방법입니다.
 
 1.  백엔드 레포지토리를 클론하고 해당 디렉토리로 이동합니다.
     ```bash
-    git clone [백엔드 깃허브 레포지토리 주소] 3thproject-back
+    git clone https://github.com/Sahmyook-4-team/3thproject-back.git 3thproject-back
     cd 3thproject-back
     ```
 
@@ -268,7 +266,7 @@ Docker 없이 각 서버를 직접 실행하는 방법입니다.
 
 1.  새 터미널을 열고 프론트엔드 레포지토리를 클론하여 이동합니다.
     ```bash
-    git clone [프론트엔드 깃허브 레포지토리 주소] 3thproject-front
+    git clone https://github.com/Sahmyook-4-team/3thproject-front.git 3thproject-front
     cd 3thproject-front
     ```
 
