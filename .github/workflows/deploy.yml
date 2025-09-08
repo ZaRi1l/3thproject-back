@@ -86,7 +86,7 @@ jobs:
             docker compose pull backend # 특정 서비스만 pull 할 수 있습니다.
 
             IMAGE_TAG_BACK="@${{ steps.build-and-push.outputs.digest }}" \
-            docker compose up -d --force-recreate 
+            docker compose up -d --force-recreate
 
             # 7. 사용하지 않는 구버전 이미지들 삭제 (디스크 용량 확보)
             docker image prune -af
