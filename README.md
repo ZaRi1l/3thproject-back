@@ -14,7 +14,7 @@
 ##### 사이트 주소: https://visidoc.zaristory.com  ( ※ 데모 계정: ID: guest / PW: guest1234 )
 ※ 참고: 클라우드 배포 버전은 보안 정책상 학교 내 Oracle DB 연동이 제외되어, 환자 검색 및 뷰어 등 핵심 기능이 동작하지 않습니다.
 <br><br>
-##### 설치 방법: <a href="/dosc/설치방법/README.md" target="_blank">설치방법</a>
+##### 설치 방법: <a href="docs/설치방법/README.md" target="_blank">설치방법</a>
 <br>
 
 ### 🛠️ 주요 기능 (Key Features)
