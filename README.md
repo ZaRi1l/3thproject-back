@@ -68,7 +68,7 @@
 | 구분 | 사용 기술 | 버전 |
 |:---:|:---|:---:|
 | **Framework** | <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white"/> | 3.5.4 |
-| **Language** | <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white"/> | 24 |
+| **Language** | <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white"/> | 21 |
 | **API** | <img src="https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white"/> <img src="https://img.shields.io/badge/REST%20API-000000?style=for-the-badge"/> | - |
 | **Data Access** | <img src="https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=for-the-badge"/> | - |
 | **Security** | <img src="https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white"/> <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white"/> | - |
