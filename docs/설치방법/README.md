@@ -20,7 +20,7 @@
 └── .env                  # (직접 생성)
 ```
 
-
+<br><br><br>
 
 ## 1. Docker를 이용한 설치 (권장)
 
@@ -58,19 +58,9 @@ cd visidoc-local
 
 # 2. 백엔드와 프론트엔드 레포지토리 클론
 # [GitHub 사용자명] 부분은 실제 프로젝트가 있는 곳으로 수정해주세요.
-git clone https://github.com/[GitHub 사용자명]/visidoc-backend.git
-git clone https://github.com/[GitHub 사용자명]/visidoc-frontend.git
+git clone https://github.com/Sahmyook-4-team/3thproject-back.git
+git clone https://github.com/Sahmyook-4-team/3thproject-front.git
 ```
-
-**[최종 목표 디렉토리 구조]**
-```
-visidoc-local/
-├── visidoc-backend/
-├── visidoc-frontend/
-├── docker-compose.yml  <- Part 3에서 생성
-└── .env                <- Part 4에서 생성
-```
-
 
 
 ## Part 3. `docker-compose.yml` 설정
@@ -81,58 +71,51 @@ visidoc-local/
 > VisiDoc을 구성하는 서비스(백엔드, 프론트엔드, PostgreSQL DB)를 어떻게 만들고 연결할지 정의하는 통합 설계도입니다. `.env` 파일의 설정을 읽어와 유연하게 동작합니다.
 
 ```yaml
-# docker-compose.yml
-
+# docker-compose.yml (Final Version)
 version: '3.8'
 
 services:
-  # -------------------- 백엔드 Spring Boot 서비스 --------------------
   backend:
-    build: ./visidoc-backend
+    build: ./3thproject-back
     container_name: visidoc-backend
     restart: always
     ports:
       - "8080:8080"
     environment:
-      # 💡 핵심: .env 파일에서 어떤 프로필을 활성화할지 결정합니다.
-      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
-      
-      # PostgreSQL 접속 정보 (항상 필요)
+      - SPRING_DATASOURCE_ORACLE_ENABLED=${SPRING_DATASOURCE_ORACLE_ENABLED}
       - SPRING_DATASOURCE_POSTGRES_URL=jdbc:postgresql://db:5432/${POSTGRES_DB}
       - SPRING_DATASOURCE_POSTGRES_USERNAME=${POSTGRES_USER}
       - SPRING_DATASOURCE_POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      
-      # Oracle 접속 정보 (prod 프로필에서만 사용됨)
       - SPRING_DATASOURCE_ORACLE_URL=jdbc:oracle:thin:@${ORACLE_HOST}:${ORACLE_PORT}:${ORACLE_SID}
       - SPRING_DATASOURCE_ORACLE_USERNAME=${ORACLE_USER}
       - SPRING_DATASOURCE_ORACLE_PASSWORD=${ORACLE_PASSWORD}
-      
-      # JWT 인증을 위한 시크릿 키
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_SECRET=${JWT_SECRET}
+      - PACS_STORAGE_URL=${PACS_STORAGE_URL}
+      - PACS_STORAGE_USERNAME=${PACS_STORAGE_USERNAME}
+      - PACS_STORAGE_PASSWORD=${PACS_STORAGE_PASSWORD}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
     depends_on:
       - db
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
-  # -------------------- 프론트엔드 Next.js 서비스 --------------------
   frontend:
-    build: ./visidoc-frontend
+    build: ./3thproject-front
     container_name: visidoc-frontend
     restart: always
     ports:
-      - "80:3000" # 외부 80 포트를 사용 (http://localhost 로 접속 가능)
+      - "80:3000"
     environment:
       - NEXT_PUBLIC_API_URL=http://backend:8080
     depends_on:
       - backend
 
-  # -------------------- PostgreSQL 데이터베이스 서비스 --------------------
   db:
     image: postgres:15
     container_name: visidoc-db
     restart: always
     ports:
-      - "5432:5432" # 외부 DB Tool 접속을 위해 포트 개방
+      - "5432:5432"
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -155,26 +138,27 @@ volumes:
 Oracle DB에 연결하여 **모든 기능**을 사용하려면 이 설정을 사용하세요.
 
 ```env
-# .env (For Scenario A: Full Integrated Environment)
+# .env (For Full Integrated Environment)
+SPRING_DATASOURCE_ORACLE_ENABLED=true
 
-# 1. 활성화할 프로필을 'prod'로 설정합니다.
-SPRING_PROFILES_ACTIVE=prod
-
-# 2. PostgreSQL 설정을 입력합니다. (이 값은 그대로 사용해도 무방합니다)
+# --- PostgreSQL & Oracle DB Settings ---
 POSTGRES_USER=visidoc_user
 POSTGRES_PASSWORD=your_strong_postgres_password
 POSTGRES_DB=visidoc
-
-# 3. 실제 접속 가능한 Oracle DB 정보를 정확하게 입력합니다.
-# 💡 Tip: 내 PC(localhost)에 Oracle이 설치된 경우, ORACLE_HOST 값으로 'host.docker.internal'을 사용하세요.
 ORACLE_HOST=host.docker.internal
 ORACLE_PORT=1521
 ORACLE_SID=ORCL
 ORACLE_USER=your_oracle_username
 ORACLE_PASSWORD=your_oracle_password
 
-# 4. JWT 시크릿 키를 입력합니다.
-JWT_SECRET_KEY=ThisIsA_SuperSecretKeyFor_VisiDoc_LocalDevelopment
+# --- JWT Secret Key (application.properties에서 그대로 복사) ---
+JWT_SECRET=V293ISB0aGlzIGlzIGEgdmVyeSB2ZXJ5IHZlcnkgbG9uZyBzZWNyZXQga2V5IGZvciBqd3QgZ3JhY2VmdWxseSBoYW5kbGluZyB0aGUgZGF0YS4=
+
+# --- PACS & CORS Settings ---
+PACS_STORAGE_URL=smb://your_pacs_server_ip/share_folder
+PACS_STORAGE_USERNAME=your_pacs_username
+PACS_STORAGE_PASSWORD=your_pacs_password
+CORS_ALLOWED_ORIGINS=http://localhost,http://localhost:3000
 ```
 
 ### ✅ 시나리오 B: 부분 개발 환경용 `.env`
@@ -182,25 +166,29 @@ JWT_SECRET_KEY=ThisIsA_SuperSecretKeyFor_VisiDoc_LocalDevelopment
 Oracle DB 없이 **부분 기능**만 개발하려면 이 설정을 사용하세요.
 
 ```env
-# .env (For Scenario B: Partial Environment without Oracle)
+# .env (For Partial Environment without Oracle)
+SPRING_DATASOURCE_ORACLE_ENABLED=false
 
-# 1. 활성화할 프로필을 'localDev'로 설정합니다.
-SPRING_PROFILES_ACTIVE=localDev
-
-# 2. PostgreSQL 설정을 입력합니다. (이 값은 그대로 사용해도 무방합니다)
+# --- PostgreSQL Settings ---
 POSTGRES_USER=visidoc_user
 POSTGRES_PASSWORD=your_strong_postgres_password
 POSTGRES_DB=visidoc
 
-# 3. Oracle 관련 정보는 'localDev' 프로필에서 사용되지 않으므로 비워두거나 주석 처리합니다.
-# ORACLE_HOST=
-# ORACLE_PORT=
-# ORACLE_SID=
-# ORACLE_USER=
-# ORACLE_PASSWORD=
+# --- Oracle (사용 안 함) ---
+ORACLE_HOST=
+ORACLE_PORT=
+ORACLE_SID=
+ORACLE_USER=
+ORACLE_PASSWORD=
 
-# 4. JWT 시크릿 키를 입력합니다.
-JWT_SECRET_KEY=ThisIsA_SuperSecretKeyFor_VisiDoc_LocalDevelopment
+# --- JWT Secret Key (application.properties에서 그대로 복사) ---
+JWT_SECRET=V293ISB0aGlzIGlzIGEgdmVyeSB2ZXJ5IHZlcnkgbG9uZyBzZWNyZXQga2V5IGZvciBqd3QgZ3JhY2VmdWxseSBoYW5kbGluZyB0aGUgZGF0YS4=
+
+# --- PACS (사용 안 함) & CORS Settings ---
+PACS_STORAGE_URL=
+PACS_STORAGE_USERNAME=
+PACS_STORAGE_PASSWORD=
+CORS_ALLOWED_ORIGINS=http://localhost,http://localhost:3000
 ```
 
 ---
@@ -242,8 +230,8 @@ docker-compose logs -f backend
 
 
 
-
-
+---
+<br><br><br><br>
 
 ## 2. 수동 설치
 
