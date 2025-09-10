@@ -25,6 +25,7 @@
 | **인터랙티브 DICOM 이미지 뷰어**| 전문 라이브러리인 **Cornerstone.js API를 활용**하여 DICOM 이미지를 렌더링하고, 필수 분석 도구(Zoom, Pan, Windowing 등)를 제공합니다. 또한, 실제 파일 경로를 숨기기 위해 **서버에서 디코딩 과정을 거쳐 이미지를 안전하게 스트리밍하는 보안 전송 메커니즘**을 REST API로 직접 구현했습니다. | `Cornerstone.js`, `REST API`, `Spring Boot`|
 | **분산 데이터 통합 조회**| 학교 DB(Oracle)의 **환자/연구 정보**와 AWS RDS(PostgreSQL)의 **의사 소견 정보**를 백엔드에서 **실시간으로 통합**하여, 사용자에게는 하나의 완성된 정보처럼 보여주는 기능을 구현했습니다.  | `Spring Boot`, `JPA`, `JPQL`|
 | **목적 중심의 데이터베이스 아키텍처** | **학교 서버(Oracle DB)의 PACS 연동 데이터**와 자체적으로 구축한 **AWS RDS(PostgreSQL)의 애플리케이션 데이터(의사 정보, 소견서 등)를 물리적으로 분리**하여 설계했습니다. 이를 통해 데이터의 성격에 따라 관리 포인트를 분리하고 시스템의 유연성을 확보했습니다.| `Multi-Datasource`, `Oracle DB`, `PostgreSQL` |
+| **웹소켓 기반 실시간 협업 채팅** | Spring WebSocket과 STOMP 프로토콜을 활용하여 의료진 간의 실시간 소통 및 협업이 가능한 채팅 기능을 구현했습니다. 이를 통해 특정 환자나 이미지에 대한 의견을 즉각적으로 교환하며 진단의 효율성을 높일 수 있습니다. | `Spring WebSocket`, `STOMP`, `SockJS` |
 
 <br>
 <br>
