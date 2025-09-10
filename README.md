@@ -37,8 +37,8 @@
 #### 맡은 역할
 | 이름 |업무|
 |:---:|---|
-|박규태|**프론트엔드** <br/> - 백엔드 API 연동 기반의 이미지 로딩 및 뷰잉 워크플로우 전체 구현 <br/> - Cornerstone.js를 활용한 DICOM 이미지 뷰어 및 분석 도구(Zoom, Pan 등) 최종 개발 <br/><br/>**백엔드** <br/> - Multi-Datasource 아키텍처 설계 (Oracle & PostgreSQL 동시 연동) <br/> - Native SQL 기반 Oracle DB 데이터 조회 로직 구현 <br/> - 환자 정보 조회를 위한 GraphQL API 및 이미지 보안 전송 REST API 구축 <br/> - Swagger API 문서화 <br/><br/>**데브옵스** <br/> - AWS 기반 인프라 구축 (EC2, RDS) <br/> - CloudFront/ACM을 활용한 HTTPS 적용 및 커스텀 도메인 연결 <br/> - Docker & Github Actions 기반 CI/CD 파이프라인 구축 <br/> - Spring Boot 및 Next.js의 환경별(dev/prod) 구성 관리 <br/><br/>**기타** <br/> - 영상 편집 <br/> - 프로젝트 기술 문서 구조 설계 및 작성 (README, docs) <br/> - Class Diagram, Squence Diagram 작성|
-|김동현|**프론트엔드** <br/> - REST/GraphQL API를 연동하여 사용자 인증 흐름(로그인, 회원 생성) 구현 <br/> - 환자 검색(이름, ID, 날짜)부터 Study/Series로 이어지는 계층적 데이터 탐색(Drill-down) UI 개발 <br/> - 소견서 작성/조회 기능을 포함한 핵심 워크플로우를 개발 <br/> - React Context API를 활용한 전역 로그인 상태 관리 구현 <br/><br/>**백엔드** <br/> - PostgreSQL 기반의 애플리케이션 DB 설계 <br/> - JPA를 활용하여 PostgreSQL DB의 데이터 CRUD 계층 구현 <br/> - JWT와 Spring Security를 활용한 회원 인증 REST API 구축 <br/> - GraphQL Resolver를 통해 이종 데이터베이스(Oracle, PostgreSQL)의 데이터를 조합하는 소견서 작성 API 개발 <br/><br/>**기타** <br/> - 영상 촬영 <br/> - 발표 자료 제작 <br/> - Usecase Diagram, Squence Diagram 작성|
+|박규태|**프론트엔드** <br/> - 백엔드 API 연동 기반의 이미지 로딩 및 뷰잉 워크플로우 전체 구현 <br/> - Cornerstone.js를 활용한 DICOM 이미지 뷰어 및 분석 도구(Zoom, Pan 등) 최종 개발 <br/><br/>**백엔드** <br/> - Multi-Datasource 아키텍처 설계 (Oracle & PostgreSQL 동시 연동) <br/> - Native SQL 기반 Oracle DB 데이터 조회 로직 구현 <br/> - 환자 정보 조회를 위한 GraphQL API 및 이미지 보안 전송 REST API 구축 <br/> - Swagger API 문서화 <br/><br/>**데브옵스** <br/> - AWS 기반 인프라 구축 (EC2, RDS) <br/> - CloudFront/ACM을 활용한 HTTPS 적용 및 커스텀 도메인 연결 <br/> - Docker & Github Actions 기반 CI/CD 파이프라인 구축 <br/> - Spring Boot 및 Next.js의 환경별(dev/prod) 구성 관리 <br/><br/>**기타**  <br/> - 발표 <br/> - 영상 편집 <br/> - 프로젝트 기술 문서 구조 설계 및 작성 (README, docs) <br/> - Class Diagram, Squence Diagram 작성|
+|김동현|**프론트엔드** <br/> - REST/GraphQL API를 연동하여 사용자 인증 흐름(로그인, 회원 생성) 구현 <br/> - 환자 검색(이름, ID, 날짜)부터 Study/Series로 이어지는 계층적 데이터 탐색(Drill-down) UI 개발 <br/> - 소견서 작성/조회 기능을 포함한 핵심 워크플로우를 개발 <br/> - React Context API를 활용한 전역 로그인 상태 관리 구현 <br/> - WebSocket 클라이언트(STOMP, SockJS)를 연동하여 실시간 채팅방 기능 및 UI 구현 <br/><br/>**백엔드** <br/> - PostgreSQL 기반의 애플리케이션 DB 설계 <br/> - JPA를 활용하여 PostgreSQL DB의 데이터 CRUD 계층 구현 <br/> - JWT와 Spring Security를 활용한 회원 인증 REST API 구축 <br/> - GraphQL Resolver를 통해 이종 데이터베이스(Oracle, PostgreSQL)의 데이터를 조합하는 소견서 작성 API 개발 <br/> - Spring WebSocket과 STOMP 프로토콜을 기반으로 실시간 채팅 기능 백엔드 구축  <br/><br/>**기타** <br/> - 시연 <br/> - 영상 촬영 <br/> - 발표 자료 제작 <br/> - Usecase Diagram, Squence Diagram 작성|
 |김윤진|**프론트엔드** <br/> - CSS Modules를 활용하여 로그인, 메인 대시보드, 뷰어, 관리자 페이지 등 모든 핵심 페이지의 UI 개발과 반응형 웹 디자인을 담당 <br/> - DICOM 뷰어의 초기 기술 검증(PoC) 및 로컬 이미지 렌더링 프로토타입을 구현 <br/><br/>**UI/UX 디자인**  <br/> - Figma를 활용하여 프로젝트의 전체 UX/UI 및 디자인 시스템 설계|
 
 <br><br>
@@ -70,6 +70,7 @@
 | **Framework** | <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white"/> | 3.5.4 |
 | **Language** | <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white"/> | 21 |
 | **API** | <img src="https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white"/> <img src="https://img.shields.io/badge/REST%20API-000000?style=for-the-badge"/> | - |
+| **WebSocket** | <img src="https://img.shields.io/badge/Spring%20WebSocket-6DB33F?style=for-the-badge&logo=spring&logoColor=white"/> | - |
 | **Data Access** | <img src="https://img.shields.io/badge/Spring%20Data%20JPA-6DB33F?style=for-the-badge"/> | - |
 | **Security** | <img src="https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white"/> <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white"/> | - |
 | **API Docs** | <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black"/> | 2.8.9 |
@@ -83,9 +84,11 @@
 | 구분 | 사용 기술 | 버전 |
 |:---:|:---|:---:|
 | **Framework**| <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white"/> | 15.4.6 |
-| **Library** | <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"/> | 19.1.0 |
+| **Library** | <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"/> <img src="https://img.shields.io/badge/React%20Icons-E91E63?style=for-the-badge&logo=react&logoColor=white"/> | 19.1.0 / ^5.5.0 |
 | **Language** | <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/> | ^5 / ES6+ |
 | **Data Fetching** | <img src="https://img.shields.io/badge/Apollo%20Client-311C87?style=for-the-badge&logo=apollo-graphql&logoColor=white"/> <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"/> | 3.10.4 / 1.11.0 |
+| **WebSocket** | <img src="https://img.shields.io/badge/STOMP.js-F24E3E?style=for-the-badge"/> <img src="https://img.shields.io/badge/SockJS-F8981D?style=for-the-badge"/> | ^7.1.1 / ^1.6.1 |
+| **Security** | <img src="https://img.shields.io/badge/jwt--decode-000000?style=for-the-badge"/> | ^4.0.0 |
 | **DICOM Viewer** | <img src="https://img.shields.io/badge/Cornerstone.js-000000?style=for-the-badge"/> | ^3.33.2 |
 | **Package Manager**| <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"/> | - |
 
