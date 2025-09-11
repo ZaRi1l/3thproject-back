@@ -4,7 +4,7 @@
 
 ---
 
-### PostgreSQL ERD
+### Component Diagram
 ![Component Diagram](./컴포넌트%20다이어그램.png)
 
 ---
