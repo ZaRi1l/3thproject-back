@@ -1,6 +1,6 @@
 ## 🔬 VisiDoc
 <div style="text-align: center;">
-    <img alt="shopshere_main" src="https://github.com/user-attachments/assets/bf3efd80-989e-4ac8-837d-9eff685e74c5" />
+    <img alt="shopshere_main" src="./docs/구현사진/검색4.JPG" />
 </div>
 
 ## 🚀 프로젝트 소개
@@ -124,17 +124,22 @@
 
 
 <br><br>
-## ▶️ 구현 영상
+<!-- ## ▶️ 구현 영상 -->
 
 ## 🖼️ 구현 사진
 ### 메인화면
+![메인화면](./docs/구현사진/메인화면.JPG)
 
-### 설정 
+### 로그인
+![로그인](./docs/구현사진/로그인.JPG)
 
+### 뷰어
+![뷰어](./docs/구현사진/뷰어3.JPG)
 
-## 구현 사진 상세
 <br>
 
+## 구현 사진 상세
+<a href="./docs/구현사진/" target="_blank">구현 사진 상세</a>
 
 <br><br>
 
