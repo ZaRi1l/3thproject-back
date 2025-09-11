@@ -46,7 +46,9 @@ public class ChatService {
                 .map(message -> ChatMessageDto.builder()
                         .content(message.getContent())
                         .senderId(message.getSender().getUserid())
-                        .senderName(message.getSender().getRealUsername())
+                        // ▼▼▼ 이 부분도 수정하세요! ▼▼▼
+                        // 보낸 사람의 실제 이름을 가져오기 위해 getRealUsername()을 호출합니다.
+                        .senderName(message.getSender().getRealUsername()) // ★★★ getUsername() -> getRealUsername() ★★★
                         .recipientId(message.getRecipient().getUserid())
                         .createdAt(message.getCreatedAt())
                         .build())
