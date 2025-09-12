@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### mp4 ###
+docs/구현영상/*.mp4
