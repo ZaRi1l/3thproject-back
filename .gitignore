@@ -36,5 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 
-### mp4 ###
+### file ###
 docs/구현영상/*.mp4
+docs/발표자료/
