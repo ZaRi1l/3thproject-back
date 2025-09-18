@@ -11,7 +11,7 @@
 이 프로젝트의 핵심은 단순히 기능을 구현하는 것을 넘어, 사내 서버의 Oracle DB와 클라우드의 AWS RDS를 동시에 연동하는 백엔드 아키텍처를 설계하고, Cornerstone.js API를 활용하여 전문적인 DICOM 뷰어를 웹상에 안정적으로 구현해내는 것이었습니다.
 <br><br>
 
-##### 사이트 주소: https://visidoc.zaristory.com  ( ※ 데모 계정: ID: guest / PW: guest1234 )
+##### 사이트 주소: https://visidoc.zaristory.com  ( ※ 데모 계정: ID: guest / PW: guest1234 | ID: guest2 / PW: guest1234 )
 ※ 참고: 클라우드 배포 버전은 보안 정책상 학교 내 Oracle DB 연동이 제외되어, 환자 검색 및 뷰어 등 핵심 기능이 동작하지 않습니다.
 <br><br>
 ##### 설치 방법: <a href="docs/설치방법/README.md" target="_blank">설치방법</a>
