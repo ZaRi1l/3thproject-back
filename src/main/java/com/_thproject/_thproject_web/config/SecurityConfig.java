@@ -94,6 +94,9 @@ public class SecurityConfig {
                         // Swagger UI 접근 허용
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/ws/**").permitAll()
 
+                        // graphQL 접근 허용
+                        .requestMatchers("/graphql/**", "/graphiql/**", "/playground/**").permitAll()
+
                         // 그 외의 모든 요청은 반드시 인증을 거쳐야 함
                         .anyRequest().authenticated());
 

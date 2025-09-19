@@ -73,6 +73,12 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
+
+
+	// GraphiQL IDE 추가 
+    // https://mvnrepository.com/artifact/com.graphql-java-kickstart/graphiql-spring-boot-starter
+	implementation("com.graphql-java-kickstart:graphiql-spring-boot-starter:11.1.0")
+
 }
 
 tasks.named('test') {
